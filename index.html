@@ -1,0 +1,621 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>uoogle +</title>
+<style>
+:root{--blue:#3c78d8;--bg:#eef1f5;--panel:#fff;--border:#dcdfe3;--text:#333;--muted:#777}
+*{box-sizing:border-box}
+body{margin:0;font-family:Arial,"Helvetica Neue",sans-serif;background:var(--bg);color:var(--text);font-size:13px}
+header{background:linear-gradient(#fff,#f6f7f8);border-bottom:1px solid var(--border);padding:8px 16px;display:flex;align-items:center;gap:12px}
+.logo{font-size:20px;color:var(--blue);font-weight:bold}
+.logo span{color:#db4437}
+#search{flex:1;max-width:500px;padding:6px 10px;border:1px solid var(--border);border-radius:2px}
+#searchHint{max-width:500px;font-size:11px}
+#searchHint a{color:var(--blue);cursor:pointer}
+.hdr-right{margin-left:auto;display:flex;align-items:center;gap:10px;font-size:12px;color:var(--muted)}
+nav{background:var(--panel);border-bottom:1px solid var(--border);padding:0 16px;display:flex;gap:18px}
+nav button{background:none;border:none;padding:10px 4px;cursor:pointer;color:var(--muted);border-bottom:2px solid transparent;font-size:13px}
+nav button.active{color:var(--blue);border-color:var(--blue)}
+#layout{display:flex;max-width:1000px;margin:14px auto;gap:14px;padding:0 10px}
+.col-main{flex:2}
+.col-side{flex:1;min-width:220px}
+.panel{background:var(--panel);border:1px solid var(--border);border-radius:2px;box-shadow:0 1px 2px rgba(0,0,0,.05);padding:12px;margin-bottom:12px}
+textarea,input[type=text],input[type=password]{width:100%;border:1px solid var(--border);border-radius:2px;padding:6px;font-family:inherit;font-size:13px}
+button.btn{background:var(--blue);color:#fff;border:none;border-radius:2px;padding:6px 14px;cursor:pointer;font-size:12px}
+button.btn.alt{background:#fff;color:var(--blue);border:1px solid var(--blue)}
+button.link{background:none;border:none;color:var(--muted);cursor:pointer;font-size:12px;padding:2px 4px}
+button.link:hover{color:var(--blue)}
+.post{border-bottom:1px solid var(--border);padding:10px 0}
+.post:last-child{border-bottom:none}
+.post-head{display:flex;align-items:center;gap:8px;margin-bottom:4px}
+.avatar{width:32px;height:32px;aspect-ratio:1/1;border-radius:50%;background:#c8d2dc;display:flex;align-items:center;justify-content:center;color:#fff;font-size:12px;overflow:hidden;flex-shrink:0}
+.avatar img{width:100%;height:100%;object-fit:cover;aspect-ratio:1/1}
+.uname{font-weight:bold;color:var(--blue);cursor:pointer}
+.uname:hover{text-decoration:underline}
+.utag{color:var(--muted);font-size:11px}
+.time{color:var(--muted);font-size:11px;margin-left:6px}
+.post-body{margin:4px 0 6px 40px;white-space:pre-wrap;word-break:break-word}
+.post img.pimg{max-width:100%;border-radius:2px;margin-top:6px}
+.post-actions{margin-left:40px;display:flex;gap:14px}
+.reply-box{margin-left:40px;margin-top:6px}
+.thread-children{margin-left:20px;border-left:2px solid var(--border);padding-left:10px}
+.highlight{background:#fff7cc}
+#status{font-size:11px;color:var(--muted)}
+.small{font-size:11px;color:var(--muted)}
+.warn{background:#fff3cd;border:1px solid #ffe58f;padding:8px;border-radius:2px;font-size:12px;margin-bottom:10px}
+.hidden{display:none}
+.follow-row{display:flex;justify-content:space-between;align-items:center;padding:4px 0}
+#loginScreen{max-width:380px;margin:60px auto}
+.profileHead{display:flex;gap:12px;align-items:center;margin-bottom:10px}
+.profileHead .avatar{width:64px;height:64px}
+.profileHead .avatar img{width:64px;height:64px}
+.err{color:#c5221f;font-size:12px;margin-top:4px}
+</style>
+</head>
+<body>
+
+<div id="loginScreen" class="panel">
+  <div class="logo" style="margin-bottom:10px">uoogle<span>+</span></div>
+  <div class="warn">uoogle+ is NOT affilated with google. <b></b> This Site is PUBLICLY viewable, do not dox yourself and pratice opsec <b>DO NOT POST ILLEGAL SHIT.</div>
+
+  <div id="stepUsername">
+    <input type="text" id="loginUser" placeholder="username">
+    <button class="btn" id="continueBtn" style="margin-top:8px">Continue</button>
+    <div class="small" style="margin-top:10px"><a id="browseLink" style="color:var(--blue);cursor:pointer">Browse uoogle+ without logging in</a></div>
+    <div id="usernameErr" class="err"></div>
+  </div>
+
+  <div id="stepLogin" class="hidden">
+    <div class="small" style="margin-bottom:6px">Welcome back, <b id="loginUnameLabel"></b>.</div>
+    <input type="password" id="loginPass" placeholder="password">
+    <button class="btn" id="loginBtn" style="margin-top:8px">Log in</button>
+    <button class="btn alt" id="backFromLogin" style="margin-top:8px">Back</button>
+    <div class="small" style="margin-top:8px"><a id="forgotLink" style="color:var(--blue);cursor:pointer">Forgot password?</a></div>
+    <div id="loginErr" class="err"></div>
+  </div>
+
+  <div id="stepSignup" class="hidden">
+    <div class="small" style="margin-bottom:6px"><b id="signupUnameLabel"></b> is available. Set a password and a backup security question.</div>
+    <input type="password" id="signupPass" placeholder="new password" style="margin-bottom:6px">
+    <input type="text" id="signupQuestion" placeholder="security question (e.g. first pet's name)" style="margin-bottom:6px">
+    <input type="text" id="signupAnswer" placeholder="security answer" style="margin-bottom:6px">
+    <button class="btn" id="signupBtn">Create account</button>
+    <button class="btn alt" id="backFromSignup">Back</button>
+    <div id="signupErr" class="err"></div>
+  </div>
+
+  <div id="stepForgot" class="hidden">
+    <div class="small" style="margin-bottom:6px">Reset password for <b id="forgotUnameLabel"></b></div>
+    <div id="forgotQuestion" class="small" style="margin-bottom:6px"></div>
+    <input type="text" id="forgotAnswer" placeholder="security answer" style="margin-bottom:6px">
+    <input type="password" id="forgotNewPass" placeholder="new password" style="margin-bottom:6px">
+    <button class="btn" id="forgotBtn">Reset password</button>
+    <button class="btn alt" id="backFromForgot">Back</button>
+    <div id="forgotErr" class="err"></div>
+  </div>
+</div>
+
+<div id="app" class="hidden">
+<header>
+  <div class="logo">uoogle<span>+</span></div>
+  <div style="flex:1;max-width:500px">
+    <input type="text" id="search" placeholder="Search people, tags, or posts">
+    <div id="searchHint" class="small hidden"></div>
+  </div>
+  <div class="hdr-right">
+    <span id="whoami"></span>
+    <button class="link" id="switchIdBtn">Log in / switch</button>
+  </div>
+</header>
+<nav>
+  <button data-tab="all" class="active">All</button>
+  <button data-tab="following">Following</button>
+  <button data-tab="profile">My Profile</button>
+</nav>
+
+<div id="layout">
+  <div class="col-main">
+    <div class="panel" id="composePanel">
+      <textarea id="composeText" rows="2" placeholder="Share what's new..."></textarea>
+      <input type="text" id="composeImg" placeholder="Image URL (must be https://files.catbox.moe/...)" style="margin-top:6px">
+      <div style="margin-top:8px;display:flex;gap:8px;align-items:center">
+        <button class="btn" id="postBtn">Share</button>
+        <button class="btn alt" id="catboxBtn" type="button">Open Catbox</button>
+        <span class="small" id="composeMsg"></span>
+      </div>
+    </div>
+    <div class="panel hidden" id="profileViewPanel"></div>
+    <div class="panel" id="feed"><div class="small">Loading posts…</div></div>
+  </div>
+  <div class="col-side">
+    <div class="panel"><div id="status">Connecting to relays…</div></div>
+    <div class="panel" id="editProfilePanel">
+      <div style="font-weight:bold;margin-bottom:6px">Edit profile</div>
+      <input type="text" id="profDisplay" placeholder="Display name" style="margin-bottom:6px">
+      <input type="text" id="profBio" placeholder="Bio" style="margin-bottom:6px">
+      <input type="text" id="profAvatar" placeholder="Avatar image URL (files.catbox.moe, must be square)" style="margin-bottom:6px">
+      <button class="btn alt" id="saveProfBtn">Save profile</button>
+      <div class="small" id="profErr" style="margin-top:4px"></div>
+    </div>
+    <div class="panel">
+      <div style="font-weight:bold;margin-bottom:6px">Following</div>
+      <div id="followList" class="small">None yet.</div>
+    </div>
+  </div>
+</div>
+</div>
+
+<script type="module">
+import { SimplePool, finalizeEvent, getPublicKey } from 'https://cdn.jsdelivr.net/npm/nostr-tools@2.10.4/+esm';
+
+const RELAYS = ["wss://relay.damus.io","wss://nos.lol","wss://relay.nostr.band","wss://relay.primal.net"];
+const APP_NAMESPACE = "uoogle-plus-v1";
+const IMG_HOST = "files.catbox.moe";
+const pool = new SimplePool();
+
+function lsGet(k,f){ try{ const v=localStorage.getItem(k); return v===null?f:JSON.parse(v);}catch(e){return f;} }
+function lsSet(k,v){ try{ localStorage.setItem(k, JSON.stringify(v)); }catch(e){} }
+
+async function sha256Bytes(str){ const b=await crypto.subtle.digest('SHA-256', new TextEncoder().encode(str)); return new Uint8Array(b); }
+function bytesToHex(b){ return Array.from(b).map(x=>x.toString(16).padStart(2,'0')).join(''); }
+async function sha256Hex(str){ return bytesToHex(await sha256Bytes(str)); }
+function normUser(u){ return (u||'').trim().toLowerCase(); }
+
+async function keysForUsername(username){
+  const secretKey = await sha256Bytes('uoogle-account-v1:'+normUser(username));
+  const pubkey = getPublicKey(secretKey);
+  const tag = '@' + bytesToHex(secretKey).slice(0,6).toUpperCase();
+  return { secretKey, pubkey, tag };
+}
+
+let ME = null;
+let READONLY = true;
+
+const relayStatus = {}; RELAYS.forEach(r=>relayStatus[r]=false);
+const relayFails = {}; RELAYS.forEach(r=>relayFails[r]=0);
+function renderStatus(){
+  const n = Object.values(relayStatus).filter(Boolean).length;
+  const el2 = document.getElementById('status');
+  if(!el2) return;
+  el2.textContent = n===0 ? "No relays are currently reachable." : (n + " of " + RELAYS.length + " relays connected");
+}
+async function connectRelay(url){
+  try{
+    const r = await pool.ensureRelay(url);
+    relayStatus[url]=true; relayFails[url]=0;
+    r.onclose = ()=>{ relayStatus[url]=false; renderStatus(); scheduleReconnect(url); };
+  }catch(e){ relayStatus[url]=false; scheduleReconnect(url); }
+  renderStatus();
+}
+function scheduleReconnect(url){
+  relayFails[url]++;
+  setTimeout(()=>connectRelay(url), Math.min(30000, 1000*Math.pow(2, relayFails[url])));
+}
+RELAYS.forEach(connectRelay);
+
+function validImageUrl(u){
+  try{ const p = new URL(u); return p.protocol==='https:' && p.hostname===IMG_HOST; }catch(e){ return false; }
+}
+function isSquareImage(url){
+  return new Promise(resolve=>{
+    const img = new Image();
+    img.onload = ()=>resolve(img.naturalWidth>0 && img.naturalWidth===img.naturalHeight);
+    img.onerror = ()=>resolve(false);
+    img.src = url;
+  });
+}
+
+const posts = new Map();
+const reactions = new Map();
+const reshares = new Map();
+const profiles = new Map();
+let following = [];
+let currentTab = 'all';
+let searchQuery = '';
+let viewingPubkey = null;
+
+function el(tag, attrs, text){
+  const n = document.createElement(tag);
+  if(attrs) for(const k in attrs){ if(k==='class') n.className=attrs[k]; else n.setAttribute(k,attrs[k]); }
+  if(text!==undefined) n.textContent = text;
+  return n;
+}
+function ensureProfile(pubkey, username, tag){
+  if(!profiles.has(pubkey)) profiles.set(pubkey, {username, tag, displayName:username, bio:'', avatar:''});
+}
+function isReply(e){ return e.tags.some(t=>t[0]==='e' && t[3]==='reply'); }
+function replyParent(e){ const t=e.tags.find(t=>t[0]==='e'&&t[3]==='reply'); return t?t[1]:null; }
+function sortNewest(a,b){ if(b.created_at!==a.created_at) return b.created_at-a.created_at; return a.id<b.id?1:-1; }
+
+function avatarEl(prof){
+  const box = el('div',{class:'avatar'});
+  if(prof && prof.avatar){ box.appendChild(el('img',{src:prof.avatar, alt:'avatar'})); }
+  else box.textContent = (prof?prof.username[0]:'?').toUpperCase();
+  return box;
+}
+
+function renderFeed(){
+  const feed = document.getElementById('feed');
+  feed.textContent = '';
+  let list = Array.from(posts.values());
+  if(currentTab==='profileView' && viewingPubkey){ list = list.filter(e=>e.pubkey===viewingPubkey); }
+  else if(currentTab==='following'){ list = list.filter(e=> following.includes(e.pubkey) || (ME && e.pubkey===ME.pubkey)); }
+  else if(currentTab==='profile'){ list = ME ? list.filter(e=> e.pubkey===ME.pubkey) : []; }
+  if(searchQuery && currentTab!=='profileView'){
+    const q = searchQuery.toLowerCase();
+    list = list.filter(e=>{
+      const prof = profiles.get(e.pubkey);
+      const uname = (prof?prof.username+' '+prof.tag:'').toLowerCase();
+      return uname.includes(q) || e.content.toLowerCase().includes(q) || e.id.toLowerCase().includes(q);
+    });
+  }
+  const roots = list.filter(e=>!isReply(e)).sort(sortNewest);
+  if(roots.length===0){ feed.appendChild(el('div',{class:'small'},'No posts yet.')); return; }
+  roots.forEach(e=>feed.appendChild(renderPost(e)));
+}
+
+function renderPost(e){
+  const wrap = el('div',{class:'post', id:'p-'+e.id});
+  const head = el('div',{class:'post-head'});
+  const prof = profiles.get(e.pubkey);
+  head.appendChild(avatarEl(prof));
+  const uname = el('span',{class:'uname'}, prof?(prof.displayName||prof.username):'unknown');
+  uname.onclick = ()=>viewProfile(e.pubkey);
+  head.appendChild(uname);
+  head.appendChild(el('span',{class:'utag'}, prof?prof.tag:''));
+  head.appendChild(el('span',{class:'time'}, new Date(e.created_at*1000).toLocaleString()));
+  wrap.appendChild(head);
+
+  const parentId = replyParent(e);
+  if(parentId && posts.has(parentId)){
+    const refLine = el('div',{class:'small'});
+    const link = el('a',{href:'#p-'+parentId, style:'color:#3c78d8;cursor:pointer'}, 'in reply to a post');
+    link.onclick = (ev)=>{ ev.preventDefault(); jumpTo(parentId); };
+    refLine.appendChild(link); wrap.appendChild(refLine);
+  }
+  wrap.appendChild(el('div',{class:'post-body'}, e.content));
+  const imgTag = e.tags.find(t=>t[0]==='image');
+  if(imgTag && validImageUrl(imgTag[1])) wrap.appendChild(el('img',{class:'pimg', src:imgTag[1], alt:'post image'}));
+
+  const acts = el('div',{class:'post-actions'});
+  const likeCount = (reactions.get(e.id)||new Map()).size;
+  const likeBtn = el('button',{class:'link'}, '👍 Like (' + likeCount + ')');
+  likeBtn.onclick = ()=>react(e.id); acts.appendChild(likeBtn);
+  const replyBtn = el('button',{class:'link'}, 'Reply');
+  replyBtn.onclick = ()=>toggleReplyBox(wrap, e.id); acts.appendChild(replyBtn);
+  const shareBtn = el('button',{class:'link'}, 'Reshare');
+  shareBtn.onclick = ()=>reshare(e.id); acts.appendChild(shareBtn);
+  wrap.appendChild(acts);
+
+  const children = Array.from(posts.values()).filter(c=>replyParent(c)===e.id).sort(sortNewest);
+  if(children.length){
+    const childWrap = el('div',{class:'thread-children'});
+    children.forEach(c=>childWrap.appendChild(renderPost(c)));
+    wrap.appendChild(childWrap);
+  }
+  return wrap;
+}
+function toggleReplyBox(wrap, parentId){
+  if(!ME){ alert('Log in to reply.'); return; }
+  let box = wrap.querySelector('.reply-box');
+  if(box){ box.remove(); return; }
+  box = el('div',{class:'reply-box'});
+  const ta = el('textarea',{rows:'2', placeholder:'Write a reply...'});
+  box.appendChild(ta);
+  const btn = el('button',{class:'btn'}, 'Reply'); btn.style.marginTop='6px';
+  btn.onclick = async ()=>{ await publishPost(ta.value, null, parentId); box.remove(); };
+  box.appendChild(btn); wrap.appendChild(box);
+}
+function jumpTo(id){
+  const node = document.getElementById('p-'+id); if(!node) return;
+  node.scrollIntoView({behavior:'smooth', block:'center'});
+  node.classList.add('highlight'); setTimeout(()=>node.classList.remove('highlight'), 1500);
+}
+function renderFollowList(){
+  const c = document.getElementById('followList'); c.textContent='';
+  if(following.length===0){ c.textContent='None yet.'; return; }
+  following.forEach(pk=>{
+    const row = el('div',{class:'follow-row'});
+    const prof = profiles.get(pk);
+    const nameEl = el('span',{}, prof?(prof.username+' '+prof.tag):pk.slice(0,10));
+    row.appendChild(nameEl);
+    const btn = el('button',{class:'link'}, 'Unfollow'); btn.onclick=()=>toggleFollow(pk);
+    row.appendChild(btn); c.appendChild(row);
+  });
+}
+
+async function viewProfile(pubkey){
+  viewingPubkey = pubkey; currentTab='profileView';
+  document.querySelectorAll('nav button').forEach(x=>x.classList.remove('active'));
+  document.getElementById('profileViewPanel').classList.remove('hidden');
+  await pool.subscribeManyEose(RELAYS, [
+    {kinds:[1], "#t":[APP_NAMESPACE], authors:[pubkey], limit:200},
+    {kinds:[30078], "#t":[APP_NAMESPACE], "#d":["uoogle-profile"], authors:[pubkey]}
+  ], { onevent: onAnyEvent });
+  renderProfilePanel(pubkey);
+  renderFeed();
+}
+function renderProfilePanel(pubkey){
+  const p = document.getElementById('profileViewPanel');
+  p.textContent='';
+  const prof = profiles.get(pubkey);
+  const head = el('div',{class:'profileHead'});
+  head.appendChild(avatarEl(prof));
+  const info = el('div');
+  info.appendChild(el('div',{style:'font-weight:bold;font-size:16px'}, prof?(prof.displayName||prof.username):'Unknown user'));
+  info.appendChild(el('div',{class:'small'}, prof?(prof.username+' '+prof.tag):''));
+  if(prof && prof.bio) info.appendChild(el('div',{style:'margin-top:4px'}, prof.bio));
+  head.appendChild(info);
+  p.appendChild(head);
+  const btnRow = el('div',{});
+  const back = el('button',{class:'btn alt'}, 'Back to feed');
+  back.onclick = ()=>{ viewingPubkey=null; currentTab='all'; p.classList.add('hidden'); document.querySelector('nav button[data-tab="all"]').classList.add('active'); renderFeed(); };
+  btnRow.appendChild(back);
+  if(ME && pubkey!==ME.pubkey){
+    const fbtn = el('button',{class:'btn alt', style:'margin-left:8px'}, following.includes(pubkey)?'Unfollow':'Follow');
+    fbtn.onclick = ()=>{ toggleFollow(pubkey); renderProfilePanel(pubkey); };
+    btnRow.appendChild(fbtn);
+  }
+  p.appendChild(btnRow);
+}
+function viewProfileByUsername(username){
+  keysForUsername(username).then(k=>viewProfile(k.pubkey));
+}
+
+function canPost(content){
+  const state = lsGet('uoogle_antispam', {lastPost:0, times:[], recent:[]});
+  const now = Date.now();
+  if(now - state.lastPost < 8000) return "Please wait a few seconds between posts.";
+  state.times = state.times.filter(t=>now-t < 10*60*1000);
+  if(state.times.length >= 15) return "Posting limit reached, try again later.";
+  if(state.recent.includes(content.trim())) return "Duplicate content blocked.";
+  return null;
+}
+function recordPost(content){
+  const state = lsGet('uoogle_antispam', {lastPost:0, times:[], recent:[]});
+  const now = Date.now();
+  state.lastPost = now; state.times.push(now);
+  state.recent.push(content.trim()); if(state.recent.length>10) state.recent.shift();
+  lsSet('uoogle_antispam', state);
+}
+
+async function publishPost(content, imageUrl, replyTo){
+  if(!ME){ alert('Log in to post.'); return; }
+  content = (content||'').trim(); if(!content) return;
+  const err = canPost(content);
+  if(err){ document.getElementById('composeMsg').textContent = err; return; }
+  const tags = [["t",APP_NAMESPACE],["u",ME.username],["tag",ME.tag]];
+  if(imageUrl && validImageUrl(imageUrl)) tags.push(["image", imageUrl]);
+  if(replyTo) tags.push(["e", replyTo, "", "reply"]);
+  const evt = { kind:1, created_at: Math.floor(Date.now()/1000), tags, content, pubkey: ME.pubkey };
+  const signed = finalizeEvent(evt, ME.secretKey);
+  posts.set(signed.id, signed);
+  pool.publish(RELAYS, signed);
+  recordPost(content); renderFeed();
+}
+async function react(postId){
+  if(!ME){ alert('Log in to react.'); return; }
+  const m = reactions.get(postId) || new Map();
+  if(m.has(ME.pubkey)) return;
+  const evt = { kind:7, created_at:Math.floor(Date.now()/1000), tags:[["e",postId],["t",APP_NAMESPACE]], content:"+", pubkey: ME.pubkey };
+  const signed = finalizeEvent(evt, ME.secretKey);
+  m.set(ME.pubkey, signed); reactions.set(postId, m);
+  pool.publish(RELAYS, signed); renderFeed();
+}
+async function reshare(postId){
+  if(!ME){ alert('Log in to reshare.'); return; }
+  const orig = posts.get(postId); if(!orig) return;
+  const evt = { kind:6, created_at:Math.floor(Date.now()/1000), tags:[["e",postId],["t",APP_NAMESPACE]], content: JSON.stringify(orig), pubkey: ME.pubkey };
+  const signed = finalizeEvent(evt, ME.secretKey);
+  reshares.set(postId, signed);
+  pool.publish(RELAYS, signed); renderFeed();
+}
+async function saveProfile(){
+  if(!ME){ alert('Log in to edit your profile.'); return; }
+  const errEl = document.getElementById('profErr'); errEl.textContent='';
+  const displayName = document.getElementById('profDisplay').value.trim();
+  const bio = document.getElementById('profBio').value.trim();
+  const avatarRaw = document.getElementById('profAvatar').value.trim();
+  let avatar = '';
+  if(avatarRaw){
+    if(!validImageUrl(avatarRaw)){ errEl.textContent='Avatar must be an https://files.catbox.moe/ URL.'; return; }
+    const square = await isSquareImage(avatarRaw);
+    if(!square){ errEl.textContent='Profile pictures must be square (equal width and height).'; return; }
+    avatar = avatarRaw;
+  }
+  const content = JSON.stringify({username:ME.username, tag:ME.tag, displayName, bio, avatar});
+  const evt = { kind:30078, created_at:Math.floor(Date.now()/1000), tags:[["d","uoogle-profile"],["t",APP_NAMESPACE]], content, pubkey: ME.pubkey };
+  const signed = finalizeEvent(evt, ME.secretKey);
+  profiles.set(ME.pubkey, {username:ME.username, tag:ME.tag, displayName, bio, avatar});
+  pool.publish(RELAYS, signed);
+  renderFeed(); errEl.textContent='Saved.';
+}
+async function toggleFollow(pubkey){
+  if(!ME){ alert('Log in to follow.'); return; }
+  if(following.includes(pubkey)) following = following.filter(p=>p!==pubkey);
+  else following.push(pubkey);
+  const evt = { kind:30078, created_at:Math.floor(Date.now()/1000), tags:[["d","uoogle-follows"],["t",APP_NAMESPACE]], content: JSON.stringify(following), pubkey: ME.pubkey };
+  const signed = finalizeEvent(evt, ME.secretKey);
+  pool.publish(RELAYS, signed);
+  renderFollowList(); renderFeed();
+}
+
+async function fetchAccount(pubkey){
+  try{
+    const events = await pool.querySync(RELAYS, {kinds:[30078], authors:[pubkey], "#d":["uoogle-account"], "#t":[APP_NAMESPACE]});
+    if(!events || events.length===0) return null;
+    events.sort((a,b)=>b.created_at-a.created_at);
+    return JSON.parse(events[0].content);
+  }catch(e){ return null; }
+}
+async function publishAccount(username, passwordHash, question, answerHash){
+  const k = await keysForUsername(username);
+  const content = JSON.stringify({username: normUser(username), passwordHash, question, answerHash, updatedAt: Date.now()});
+  const evt = { kind:30078, created_at:Math.floor(Date.now()/1000), tags:[["d","uoogle-account"],["t",APP_NAMESPACE]], content, pubkey: k.pubkey };
+  const signed = finalizeEvent(evt, k.secretKey);
+  pool.publish(RELAYS, signed);
+}
+
+function onAnyEvent(e){
+  if(e.kind===1){
+    if(posts.has(e.id)) return;
+    posts.set(e.id, e);
+    const u = e.tags.find(t=>t[0]==='u'); const tg = e.tags.find(t=>t[0]==='tag');
+    if(u&&tg) ensureProfile(e.pubkey, u[1], tg[1]);
+    renderFeed();
+  } else if(e.kind===7){
+    const postId = (e.tags.find(t=>t[0]==='e')||[])[1]; if(!postId) return;
+    const m = reactions.get(postId) || new Map();
+    if(m.has(e.pubkey) && m.get(e.pubkey).created_at >= e.created_at) return;
+    m.set(e.pubkey, e); reactions.set(postId, m); renderFeed();
+  } else if(e.kind===6){
+    const postId = (e.tags.find(t=>t[0]==='e')||[])[1]; if(!postId) return;
+    reshares.set(postId, e); renderFeed();
+  } else if(e.kind===30078){
+    const d = (e.tags.find(t=>t[0]==='d')||[])[1];
+    if(d==='uoogle-profile'){
+      try{
+        const c = JSON.parse(e.content);
+        profiles.set(e.pubkey, {username:c.username, tag:c.tag, displayName:c.displayName||c.username, bio:c.bio||'', avatar:c.avatar||''});
+        renderFeed(); renderFollowList();
+        if(currentTab==='profileView' && viewingPubkey===e.pubkey) renderProfilePanel(e.pubkey);
+      }catch(err){}
+    } else if(d==='uoogle-follows' && ME && e.pubkey===ME.pubkey){
+      try{ following = JSON.parse(e.content) || []; renderFollowList(); renderFeed(); }catch(err){}
+    }
+  }
+}
+function subscribeAll(){
+  pool.subscribeMany(RELAYS, [{kinds:[1], "#t":[APP_NAMESPACE], limit:300}], {onevent:onAnyEvent});
+  pool.subscribeMany(RELAYS, [{kinds:[7], "#t":[APP_NAMESPACE], limit:1000}], {onevent:onAnyEvent});
+  pool.subscribeMany(RELAYS, [{kinds:[6], "#t":[APP_NAMESPACE], limit:300}], {onevent:onAnyEvent});
+  pool.subscribeMany(RELAYS, [{kinds:[30078], "#t":[APP_NAMESPACE], "#d":["uoogle-profile"]}], {onevent:onAnyEvent});
+  if(ME) pool.subscribeMany(RELAYS, [{kinds:[30078], "#t":[APP_NAMESPACE], "#d":["uoogle-follows"], authors:[ME.pubkey]}], {onevent:onAnyEvent});
+}
+
+function showStep(id){
+  ['stepUsername','stepLogin','stepSignup','stepForgot'].forEach(s=>document.getElementById(s).classList.toggle('hidden', s!==id));
+}
+document.getElementById('continueBtn').onclick = async ()=>{
+  const uErr = document.getElementById('usernameErr'); uErr.textContent='';
+  const username = document.getElementById('loginUser').value;
+  if(!normUser(username)){ uErr.textContent='Enter a username.'; return; }
+  uErr.textContent = 'Checking relays…';
+  const k = await keysForUsername(username);
+  const account = await fetchAccount(k.pubkey);
+  uErr.textContent='';
+  if(account){
+    document.getElementById('loginUnameLabel').textContent = normUser(username);
+    showStep('stepLogin');
+  } else {
+    document.getElementById('signupUnameLabel').textContent = normUser(username);
+    showStep('stepSignup');
+  }
+};
+document.getElementById('backFromLogin').onclick = ()=>showStep('stepUsername');
+document.getElementById('backFromSignup').onclick = ()=>showStep('stepUsername');
+document.getElementById('backFromForgot').onclick = ()=>showStep('stepUsername');
+
+document.getElementById('loginBtn').onclick = async ()=>{
+  const errEl = document.getElementById('loginErr'); errEl.textContent='';
+  const username = document.getElementById('loginUser').value;
+  const password = document.getElementById('loginPass').value;
+  const k = await keysForUsername(username);
+  const account = await fetchAccount(k.pubkey);
+  if(!account){ errEl.textContent='Account not found on any relay right now, try again.'; return; }
+  const hash = await sha256Hex('uoogle-pw:'+password);
+  if(hash !== account.passwordHash){ errEl.textContent='Incorrect password.'; return; }
+  enterApp(k, false);
+};
+document.getElementById('signupBtn').onclick = async ()=>{
+  const errEl = document.getElementById('signupErr'); errEl.textContent='';
+  const username = document.getElementById('loginUser').value;
+  const password = document.getElementById('signupPass').value;
+  const question = document.getElementById('signupQuestion').value.trim();
+  const answer = document.getElementById('signupAnswer').value;
+  if(!password || !question || !answer){ errEl.textContent='Fill in all fields.'; return; }
+  const k = await keysForUsername(username);
+  const passwordHash = await sha256Hex('uoogle-pw:'+password);
+  const answerHash = await sha256Hex('uoogle-ans:'+normUser(answer));
+  await publishAccount(username, passwordHash, question, answerHash);
+  enterApp(k, false);
+};
+document.getElementById('forgotLink').onclick = async ()=>{
+  const username = document.getElementById('loginUser').value;
+  document.getElementById('forgotUnameLabel').textContent = normUser(username);
+  document.getElementById('forgotQuestion').textContent = 'Loading question…';
+  showStep('stepForgot');
+  const k = await keysForUsername(username);
+  const account = await fetchAccount(k.pubkey);
+  document.getElementById('forgotQuestion').textContent = account ? ('Question: ' + account.question) : 'Account not found.';
+};
+document.getElementById('forgotBtn').onclick = async ()=>{
+  const errEl = document.getElementById('forgotErr'); errEl.textContent='';
+  const username = document.getElementById('loginUser').value;
+  const answer = document.getElementById('forgotAnswer').value;
+  const newPass = document.getElementById('forgotNewPass').value;
+  if(!newPass){ errEl.textContent='Enter a new password.'; return; }
+  const k = await keysForUsername(username);
+  const account = await fetchAccount(k.pubkey);
+  if(!account){ errEl.textContent='Account not found.'; return; }
+  const answerHash = await sha256Hex('uoogle-ans:'+normUser(answer));
+  if(answerHash !== account.answerHash){ errEl.textContent='Incorrect answer.'; return; }
+  const passwordHash = await sha256Hex('uoogle-pw:'+newPass);
+  await publishAccount(username, passwordHash, account.question, account.answerHash);
+  errEl.textContent='Password reset. You can log in now.';
+};
+document.getElementById('browseLink').onclick = ()=>enterApp(null, true);
+
+async function enterApp(k, readonly){
+  READONLY = readonly;
+  ME = readonly ? null : { username: normUser(document.getElementById('loginUser').value), tag:k.tag, secretKey:k.secretKey, pubkey:k.pubkey };
+  document.getElementById('loginScreen').classList.add('hidden');
+  document.getElementById('app').classList.remove('hidden');
+  document.getElementById('composePanel').classList.toggle('hidden', readonly);
+  document.getElementById('editProfilePanel').classList.toggle('hidden', readonly);
+  document.getElementById('whoami').textContent = readonly ? 'Browsing (not logged in)' : (ME.username + ' ' + ME.tag);
+  if(ME) ensureProfile(ME.pubkey, ME.username, ME.tag);
+  subscribeAll();
+  renderFeed();
+  if(!readonly) lsSet('uoogle_last_username', ME.username);
+}
+
+document.getElementById('postBtn').onclick = ()=>{
+  const txt = document.getElementById('composeText').value;
+  const img = document.getElementById('composeImg').value.trim();
+  const msg = document.getElementById('composeMsg'); msg.textContent='';
+  if(img && !validImageUrl(img)){ msg.textContent = 'Image URL must be https://files.catbox.moe/...'; return; }
+  publishPost(txt, img||null, null);
+  document.getElementById('composeText').value=''; document.getElementById('composeImg').value='';
+};
+document.getElementById('catboxBtn').onclick = ()=>window.open('https://catbox.moe/', '_blank');
+document.getElementById('saveProfBtn').onclick = saveProfile;
+document.getElementById('switchIdBtn').onclick = ()=>location.reload();
+document.querySelectorAll('nav button').forEach(b=>{
+  b.onclick = ()=>{
+    document.querySelectorAll('nav button').forEach(x=>x.classList.remove('active'));
+    b.classList.add('active'); currentTab = b.dataset.tab; viewingPubkey=null;
+    document.getElementById('profileViewPanel').classList.add('hidden');
+    renderFeed();
+  };
+});
+document.getElementById('search').oninput = (e)=>{
+  searchQuery = e.target.value;
+  const hint = document.getElementById('searchHint');
+  if(searchQuery.trim()){
+    hint.classList.remove('hidden'); hint.textContent='';
+    const link = el('a',{}, 'View profile: ' + searchQuery.trim());
+    link.onclick = ()=>viewProfileByUsername(searchQuery.trim());
+    hint.appendChild(link);
+  } else hint.classList.add('hidden');
+  renderFeed();
+};
+
+setInterval(renderStatus, 5000);
+const lastU = lsGet('uoogle_last_username', null);
+if(lastU) document.getElementById('loginUser').value = lastU;
+</script>
+</body>
+</html>

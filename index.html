@@ -5,140 +5,224 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>uoogle +</title>
 <style>
-:root{--blue:#3c78d8;--bg:#eef1f5;--panel:#fff;--border:#dcdfe3;--text:#333;--muted:#777}
+:root{--blue:#4d90fe;--link:#3c78d8;--bg:#e4e4e4;--panel:#fff;--border:#d8d8d8;--text:#333;--muted:#999;--green:#55a644}
 *{box-sizing:border-box}
-body{margin:0;font-family:Arial,"Helvetica Neue",sans-serif;background:var(--bg);color:var(--text);font-size:13px}
-header{background:linear-gradient(#fff,#f6f7f8);border-bottom:1px solid var(--border);padding:8px 16px;display:flex;align-items:center;gap:12px}
-.logo{font-size:20px;color:var(--blue);font-weight:bold}
-.logo span{color:#db4437}
-#search{flex:1;max-width:500px;padding:6px 10px;border:1px solid var(--border);border-radius:2px}
-#searchHint{max-width:500px;font-size:11px}
-#searchHint a{color:var(--blue);cursor:pointer}
-.hdr-right{margin-left:auto;display:flex;align-items:center;gap:10px;font-size:12px;color:var(--muted)}
-nav{background:var(--panel);border-bottom:1px solid var(--border);padding:0 16px;display:flex;gap:18px}
-nav button{background:none;border:none;padding:10px 4px;cursor:pointer;color:var(--muted);border-bottom:2px solid transparent;font-size:13px}
-nav button.active{color:var(--blue);border-color:var(--blue)}
-#layout{display:flex;max-width:1000px;margin:14px auto;gap:14px;padding:0 10px}
-.col-main{flex:2}
-.col-side{flex:1;min-width:220px}
-.panel{background:var(--panel);border:1px solid var(--border);border-radius:2px;box-shadow:0 1px 2px rgba(0,0,0,.05);padding:12px;margin-bottom:12px}
-textarea,input[type=text],input[type=password]{width:100%;border:1px solid var(--border);border-radius:2px;padding:6px;font-family:inherit;font-size:13px}
-button.btn{background:var(--blue);color:#fff;border:none;border-radius:2px;padding:6px 14px;cursor:pointer;font-size:12px}
-button.btn.alt{background:#fff;color:var(--blue);border:1px solid var(--blue)}
-button.link{background:none;border:none;color:var(--muted);cursor:pointer;font-size:12px;padding:2px 4px}
-button.link:hover{color:var(--blue)}
-.post{border-bottom:1px solid var(--border);padding:10px 0}
-.post:last-child{border-bottom:none}
-.post-head{display:flex;align-items:center;gap:8px;margin-bottom:4px}
-.avatar{width:32px;height:32px;aspect-ratio:1/1;border-radius:50%;background:#c8d2dc;display:flex;align-items:center;justify-content:center;color:#fff;font-size:12px;overflow:hidden;flex-shrink:0}
-.avatar img{width:100%;height:100%;object-fit:cover;aspect-ratio:1/1}
-.uname{font-weight:bold;color:var(--blue);cursor:pointer}
-.uname:hover{text-decoration:underline}
-.utag{color:var(--muted);font-size:11px}
-.time{color:var(--muted);font-size:11px;margin-left:6px}
-.post-body{margin:4px 0 6px 40px;white-space:pre-wrap;word-break:break-word}
-.post img.pimg{max-width:100%;border-radius:2px;margin-top:6px}
-.post-actions{margin-left:40px;display:flex;gap:14px}
-.reply-box{margin-left:40px;margin-top:6px}
-.thread-children{margin-left:20px;border-left:2px solid var(--border);padding-left:10px}
-.highlight{background:#fff7cc}
-#status{font-size:11px;color:var(--muted)}
+body{margin:0;font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;background:var(--bg);color:var(--text);font-size:13px}
+.hidden{display:none!important}
 .small{font-size:11px;color:var(--muted)}
-.warn{background:#fff3cd;border:1px solid #ffe58f;padding:8px;border-radius:2px;font-size:12px;margin-bottom:10px}
-.hidden{display:none}
-.follow-row{display:flex;justify-content:space-between;align-items:center;padding:4px 0}
-#loginScreen{max-width:380px;margin:60px auto}
-.profileHead{display:flex;gap:12px;align-items:center;margin-bottom:10px}
-.profileHead .avatar{width:64px;height:64px}
-.profileHead .avatar img{width:64px;height:64px}
-.err{color:#c5221f;font-size:12px;margin-top:4px}
-.glogo{font-size:22px;font-weight:bold;letter-spacing:-0.5px}
-.glogo b{font-weight:bold}
-.glogo .c1{color:#4285f4}.glogo .c2{color:#db4437}.glogo .c3{color:#f4b400}.glogo .c4{color:#4285f4}.glogo .c5{color:#0f9d58}.glogo .c6{color:#db4437}
+.err{color:#c5221f;font-size:12px;margin-top:6px}
+textarea,input[type=text],input[type=password]{width:100%;border:1px solid var(--border);border-radius:0;padding:6px 8px;font-family:inherit;font-size:13px;background:#fff}
+button.btn{background:var(--blue);color:#fff;border:1px solid #3079ed;border-radius:2px;padding:7px 14px;cursor:pointer;font-size:12px;font-weight:bold}
+button.btn.green{background:var(--green);border-color:#478b39}
+button.btn.alt{background:#f8f8f8;color:#444;border:1px solid #ccc}
+button.link{background:none;border:none;color:var(--muted);cursor:pointer;font-size:12px;padding:2px 4px}
+button.link:hover{color:var(--link)}
+.glogo{font-size:24px;font-weight:bold;letter-spacing:-0.5px;white-space:nowrap}
+.glogo .c1,.glogo .c4{color:#4285f4}.glogo .c2,.glogo .c6{color:#db4437}.glogo .c3{color:#f4b400}.glogo .c5{color:#0f9d58}
 .glogo .plus{color:#8a8a8a;font-weight:normal;margin-left:3px}
-.searchWrap{flex:1;max-width:520px;display:flex}
-.searchWrap input{border-radius:2px 0 0 2px;border-right:none}
-.searchBtn{background:var(--blue);border:1px solid var(--blue);color:#fff;border-radius:0 2px 2px 0;padding:0 14px;cursor:pointer}
-.rail{width:46px;display:flex;flex-direction:column;align-items:center;gap:6px;padding-top:2px}
-.rail button{background:none;border:none;cursor:pointer;font-size:19px;color:var(--muted);padding:8px;border-radius:50%;width:40px;height:40px}
-.rail button.active{color:var(--blue);background:#e8f0fe}
-.rail button:hover{background:#f1f3f4}
-.hdr-avatar{width:32px;height:32px;border-radius:50%;background:var(--blue);color:#fff;display:flex;align-items:center;justify-content:center;font-size:13px;cursor:pointer;overflow:hidden}
+#loginScreen{max-width:1000px;margin:70px auto;padding:0 20px;display:flex;gap:70px;align-items:flex-start}
+#loginTagline{flex:1;padding-top:40px}
+#loginTagline h1{font-size:32px;font-weight:400;margin:0 0 12px;color:#444}
+#loginTagline p{margin:0 0 10px;font-size:13px;color:#555;line-height:1.5}
+#loginBox{flex:0 0 330px;background:#f1f1f1;border:1px solid var(--border);padding:24px}
+#loginBox h2{margin:0 0 14px;font-size:19px;font-weight:400}
+#loginBox label{display:block;font-weight:bold;margin:12px 0 5px}
+.stayrow{display:flex;align-items:center;gap:6px;margin-top:10px;color:#555}
+.stayrow input{margin:0}
+.loginLinks{margin-top:14px}
+.loginLinks a{color:#1a55c8;cursor:pointer}
+header{background:#fff;height:56px;padding:0 16px;display:flex;align-items:center;gap:18px}
+.searchWrap{flex:1;max-width:480px;display:flex}
+.searchWrap input{border-right:none;height:28px}
+.searchBtn{width:70px;background:var(--blue);border:1px solid #3079ed;color:#fff;cursor:pointer;display:flex;align-items:center;justify-content:center;border-radius:0 2px 2px 0}
+.hdr-right{margin-left:auto;display:flex;align-items:center;gap:14px;font-size:12px;white-space:nowrap;color:#333;position:relative}
+.notifbadge{background:#d24b2e;color:#fff;font-weight:bold;padding:4px 9px;cursor:pointer}
+.bellbox,.idbox{position:relative}
+.idbox{display:flex;align-items:center;gap:3px;cursor:pointer}
+.hdr-avatar{width:34px;height:34px;border-radius:50%;background:#8ab4f8;color:#4a76d4;display:flex;align-items:center;justify-content:center;overflow:hidden}
 .hdr-avatar img{width:100%;height:100%;object-fit:cover}
-.idbox{position:relative}
-.iddrop{position:absolute;right:0;top:38px;background:#fff;border:1px solid var(--border);border-radius:2px;box-shadow:0 2px 6px rgba(0,0,0,.15);padding:8px;min-width:160px;z-index:5}
-.bellbox{position:relative}
-.bell{font-size:18px;cursor:pointer;position:relative;padding:4px}
-.badge{position:absolute;top:-2px;right:-2px;background:#db4437;color:#fff;font-size:9px;border-radius:8px;padding:1px 4px;min-width:14px;text-align:center}
-.notifdrop{position:absolute;right:0;top:30px;background:#fff;border:1px solid var(--border);border-radius:2px;box-shadow:0 2px 6px rgba(0,0,0,.15);padding:6px;width:260px;z-index:5;max-height:300px;overflow-y:auto}
-.notifrow{padding:6px;border-bottom:1px solid var(--border);cursor:pointer;font-size:12px}
-.notifrow:hover{background:#f6f7f8}
-.shared-publicly{color:var(--muted);font-size:11px;margin-left:40px;margin-top:-2px;margin-bottom:4px}
-.icon-actions{margin-left:40px;display:flex;gap:16px;border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:4px 0}
-.icon-actions button{background:none;border:none;color:var(--muted);cursor:pointer;font-size:12px;display:flex;align-items:center;gap:4px}
-.icon-actions button:hover{color:var(--blue)}
-.commentBox{margin-left:40px;margin-top:6px;display:flex;gap:6px}
-.commentBox input{flex:1}
-.suggest-row{display:flex;align-items:center;gap:8px;padding:6px 0;border-bottom:1px solid var(--border)}
-.suggest-row:last-child{border-bottom:none}
-.suggest-row .info{flex:1}
-.suggest-row .name{font-weight:bold;font-size:12px}
-.trend-row{padding:5px 0;font-size:12px;border-bottom:1px solid var(--border);cursor:pointer;color:var(--blue)}
-.trend-row:last-child{border-bottom:none}
-.trend-row:hover{text-decoration:underline}
-.photo-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(100px,1fr));gap:6px}
-.photo-grid img{width:100%;aspect-ratio:1/1;object-fit:cover;border-radius:2px;cursor:pointer;border:1px solid var(--border)}
+.caret{color:var(--muted);font-size:10px}
+.dropmenu{position:absolute;right:0;top:100%;margin-top:6px;background:#fff;border:1px solid #ccc;box-shadow:0 2px 6px rgba(0,0,0,.2);min-width:180px;z-index:20}
+.dropmenu button{display:block;width:100%;text-align:left;padding:9px 14px;background:none;border:none;cursor:pointer;font-size:13px;color:#333}
+.dropmenu button:hover{background:#f1f1f1}
+.notifdrop{width:280px;max-height:320px;overflow-y:auto}
+.notifrow{padding:9px 12px;border-bottom:1px solid #eee;cursor:pointer;font-size:12px}
+.notifrow:hover{background:#f6f6f6}
+.subnav{background:#f4f4f4;height:44px;padding:0 16px;display:flex;align-items:center;border-bottom:1px solid #e9e9e9}
+.sectionSwitch{position:relative;width:160px}
+.sectionSwitch>button{display:flex;align-items:center;gap:7px;background:#fff;border:none;box-shadow:0 1px 2px rgba(0,0,0,.2);padding:6px 10px;cursor:pointer;color:#555;font-size:13px}
+.sectionMenu{position:absolute;left:0;top:100%;margin-top:4px;background:#fff;border:1px solid #ccc;box-shadow:0 2px 6px rgba(0,0,0,.2);min-width:160px;z-index:20}
+.sectionMenu button{display:block;width:100%;text-align:left;padding:9px 14px;background:none;border:none;cursor:pointer;font-size:13px}
+.sectionMenu button:hover{background:#f1f1f1}
+nav{flex:1;display:flex;justify-content:center;gap:26px}
+nav button{background:none;border:none;height:44px;padding:0 4px;cursor:pointer;color:#666;font-size:14px;border-bottom:3px solid transparent}
+nav button.active{color:#000;font-weight:bold;border-color:#4479d6}
+.subnav-right{width:160px;display:flex;justify-content:flex-end}
+.statusdot{width:11px;height:11px;border-radius:50%;background:#0f9d58;cursor:pointer}
+.statusdot.down{background:#db4437}
+#layout{max-width:1100px;margin:16px auto;padding:0 16px}
+#board{display:flex;gap:18px;align-items:flex-start;justify-content:center}
+#colLeft{flex:0 0 440px;display:flex;flex-direction:column;gap:18px}
+#colRight{flex:0 1 440px;min-width:0;display:flex;flex-direction:column;gap:18px}
+.panel{background:var(--panel);border:1px solid #ccc;box-shadow:0 1px 3px 1px rgba(0,0,0,.09);padding:12px}
+.compose{background:#f6f6f6}
+.compose textarea{height:80px;resize:none;border:1px solid var(--border);padding:8px}
+.composeIcons{display:flex;gap:26px;margin:16px 0 4px 10px}
+.cicon{display:flex;flex-direction:column;align-items:center;gap:4px;background:none;border:none;cursor:pointer;color:#8b8b8b;font-size:11px}
+.cicon.active{color:#000;font-weight:bold}
+.cicon.active svg{color:var(--green)}
+.composeExtra{margin-top:10px;display:flex;flex-direction:column;gap:6px}
+.composeActions{margin-top:10px;display:flex;gap:8px;align-items:center}
+.explore-card{padding:0}
+.explore-banner{background:#4479d6;color:#fff;font-size:20px;padding:20px 20px 24px}
+.explore-cats{display:grid;grid-template-columns:1fr 1fr;gap:10px 20px;padding:20px}
+.explore-cats a{color:#333;cursor:pointer;font-size:13px}
+.explore-cats a:hover{color:var(--link);text-decoration:underline}
+.hot-head{background:#f6f6f6}
+.hot-head h2{margin:14px 0 14px;font-size:30px;font-weight:400;color:#a5a5a5}
+.hot-head b{font-size:12px;color:#333}
+.hotPosts{display:flex;flex-direction:column;gap:18px}
+.post{background:#fff;border:1px solid #ccc;box-shadow:0 1px 3px 1px rgba(0,0,0,.09)}
+.post-main{padding:14px 14px 10px}
+.post-head{display:flex;align-items:center;gap:12px}
+.avatar{width:36px;height:36px;border-radius:50%;background:#8ab4f8;color:#4a76d4;display:flex;align-items:center;justify-content:center;overflow:hidden;flex-shrink:0}
+.avatar img{width:100%;height:100%;object-fit:cover;aspect-ratio:1/1}
+.uname{font-weight:bold;color:#222;font-size:14px;cursor:pointer}
+.uname:hover{color:var(--link)}
+.meta{color:var(--muted);font-size:12px;margin-top:2px}
+.post-body{margin:22px 0 6px;white-space:pre-wrap;word-break:break-word;font-size:13px;color:#404040}
+.post img.pimg{display:block;max-width:100%;margin-top:8px}
+.post video.pvid{display:block;width:100%;max-height:420px;margin-top:8px;background:#000}
+.post-footer{display:flex;align-items:center;gap:8px;padding:8px 14px 14px}
+.plusBtn{min-width:32px;height:30px;border:1px solid #ccc;background:#fff;cursor:pointer;font-size:14px;font-weight:bold;color:#000;padding:0 8px}
+.plusBtn.reacted{background:#cc4331;border-color:#cc4331;color:#fff}
+.commentInline{flex:1;min-width:0;height:30px}
+.comments{background:#f4f4f4;border-top:1px solid #fff;padding:4px 14px 10px}
+.comment{display:flex;gap:10px;margin-top:12px}
+.comment .avatar{width:28px;height:28px;border-radius:3px}
+.comment-head{font-size:12px}
+.comment-head b{text-transform:uppercase;color:#333;margin-right:8px}
+.comment-head span{color:#aaa}
+.comment-text{font-size:13px;margin-top:2px;white-space:pre-wrap;word-break:break-word}
+.comment-replies{margin-left:10px}
+.highlight{background:#fff7cc}
+.profile-banner{display:flex;height:240px;max-width:900px;margin:0 auto}
+.pb-left{flex:0 0 32%;background:linear-gradient(170deg,#2b7a45,#1c3d26);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;color:#fff}
+.pb-left .avatar{border:none}
+.pb-name{font-size:18px}
+.pb-follow{font-size:11px;font-weight:bold}
+.pb-right{flex:1;position:relative;overflow:hidden;background:linear-gradient(#a7f08e,#4fb46a)}
+.hill{position:absolute;border-radius:50%}
+.h1{width:120%;height:70%;left:-10%;bottom:-38%;background:#3f9d5d}
+.h2{width:100%;height:60%;left:20%;bottom:-40%;background:#2c7a45}
+.h3{width:70%;height:90%;left:-15%;top:-30%;background:rgba(255,255,255,.12)}
+.profile-tabsbar{display:flex;justify-content:center;background:#fff;max-width:900px;margin:0 auto 18px;height:36px}
+.profile-tabsbar button{background:none;border:none;padding:0 20px;cursor:pointer;color:#555;font-size:12px;border-bottom:2px solid transparent}
+.profile-tabsbar button.active{font-weight:bold;color:#000;border-color:#4479d6}
+.fullpanel{max-width:900px;margin:0 auto}
+.about-block{margin-bottom:16px}
+.about-block h3{margin:0 0 8px;font-size:14px}
+.about-block input{margin-bottom:6px}
+.follow-row{display:flex;justify-content:space-between;align-items:center;padding:4px 0}
+.photo-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:20px}
+.photo-cell{background:#fff;border:1px solid #ddd;border-radius:4px;padding:4px}
+.photo-cell img{display:block;width:100%;aspect-ratio:1/1;object-fit:cover;cursor:pointer}
+.photo-grid-empty{grid-column:1/-1;text-align:center;color:var(--muted);padding:30px 0}
+.communities-wrap{max-width:1100px;margin:0 auto}
+.communities-head{display:flex;justify-content:space-between;align-items:center;margin:20px 0 14px}
+.communities-head h1{font-size:22px;font-weight:400;color:#606060;margin:0}
+.section-title{font-size:16px;color:#606060;margin:26px 0 12px}
+.community-grid{display:flex;flex-wrap:wrap;gap:20px}
+.community-tile{width:250px;background:#fff;box-shadow:0 1px 3px 1px rgba(0,0,0,.09)}
+.community-banner{height:200px;display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,.75)}
+.community-body{padding:10px 12px 12px}
+.community-name{font-weight:bold;color:#606060;font-size:14px;margin-bottom:2px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.community-meta{color:#646766;font-size:11px;margin-bottom:8px}
+.create-community{max-width:340px;display:flex;flex-direction:column;gap:8px}
+@media (max-width:960px){
+  #board{flex-direction:column;align-items:stretch}
+  #colLeft,#colRight{flex:none;width:100%}
+  .profile-banner{height:200px}
+}
+@media (max-width:760px){
+  #loginScreen{flex-direction:column;gap:20px;margin:30px auto}
+  #loginBox{flex:none;width:100%}
+  header{flex-wrap:wrap;height:auto;padding:8px 12px;gap:8px}
+  .searchWrap{order:3;flex-basis:100%;max-width:100%}
+  #whoami{display:none}
+  .sectionSwitch,.subnav-right{width:auto}
+}
 </style>
 </head>
 <body>
 
-<div id="loginScreen" class="panel">
-  <div class="glogo" style="margin-bottom:10px"><b class="c1">u</b><b class="c2">o</b><b class="c3">o</b><b class="c4">g</b><b class="c5">l</b><b class="c6">e</b><span class="plus">+</span></div>
-  <div class="warn">WELCOME TO UOOGLE+<b>FRESH PUDDING</b>YES PLEASE <b>TOMMY</b>. pratice opsec guys</div>
-
-  <div id="stepUsername">
-    <input type="text" id="loginUser" placeholder="username">
-    <button class="btn" id="continueBtn" style="margin-top:8px">Continue</button>
-    <div class="small" style="margin-top:10px"><a id="browseLink" style="color:var(--blue);cursor:pointer">Browse uoogle+ without logging in</a></div>
-    <div id="usernameErr" class="err"></div>
+<div id="loginScreen">
+  <div id="loginTagline">
+    <div class="glogo" style="margin-bottom:26px"><b class="c1">u</b><b class="c2">o</b><b class="c3">o</b><b class="c4">g</b><b class="c5">l</b><b class="c6">e</b><span class="plus">+</span></div>
+    <h1>"The best site I ever visited" - Thomas "Tommy Parky" Parkinson</h1>
+    <p>GOD DAMM!</p>
+    <p>TOMMY PARKY FRESH PUDDING YES PLEASE</p>
   </div>
-
-  <div id="stepLogin" class="hidden">
-    <div class="small" style="margin-bottom:6px">Welcome back, <b id="loginUnameLabel"></b>.</div>
-    <input type="password" id="loginPass" placeholder="password">
-    <button class="btn" id="loginBtn" style="margin-top:8px">Log in</button>
-    <button class="btn alt" id="backFromLogin" style="margin-top:8px">Back</button>
-    <div class="small" style="margin-top:8px"><a id="forgotLink" style="color:var(--blue);cursor:pointer">Forgot password?</a></div>
-    <div id="loginErr" class="err"></div>
-  </div>
-
-  <div id="stepSignup" class="hidden">
-    <div class="small" style="margin-bottom:6px"><b id="signupUnameLabel"></b> is available. Set a password and a backup security question.</div>
-    <input type="password" id="signupPass" placeholder="new password" style="margin-bottom:6px">
-    <input type="text" id="signupQuestion" placeholder="security question (e.g. first pet's name)" style="margin-bottom:6px">
-    <input type="text" id="signupAnswer" placeholder="security answer" style="margin-bottom:6px">
-    <button class="btn" id="signupBtn">Create account</button>
-    <button class="btn alt" id="backFromSignup">Back</button>
-    <div id="signupErr" class="err"></div>
-  </div>
-
-  <div id="stepForgot" class="hidden">
-    <div class="small" style="margin-bottom:6px">Reset password for <b id="forgotUnameLabel"></b></div>
-    <div id="forgotQuestion" class="small" style="margin-bottom:6px"></div>
-    <input type="text" id="forgotAnswer" placeholder="security answer" style="margin-bottom:6px">
-    <input type="password" id="forgotNewPass" placeholder="new password" style="margin-bottom:6px">
-    <button class="btn" id="forgotBtn">Reset password</button>
-    <button class="btn alt" id="backFromForgot">Back</button>
-    <div id="forgotErr" class="err"></div>
+  <div id="loginBox">
+    <div id="stepUsername">
+      <h2>Sign in</h2>
+      <label for="loginUser">Username</label>
+      <input type="text" id="loginUser">
+      <button class="btn" id="continueBtn" style="margin-top:16px">Continue</button>
+      <div id="usernameErr" class="err"></div>
+      <div class="loginLinks"><a id="browseLink">Browse without signing in</a></div>
+    </div>
+    <div id="stepLogin" class="hidden">
+      <h2>Sign in</h2>
+      <div class="small">Welcome back, <b id="loginUnameLabel"></b></div>
+      <label for="loginPass">Password</label>
+      <input type="password" id="loginPass">
+      <div style="margin-top:16px;display:flex;gap:8px;align-items:center">
+        <button class="btn" id="loginBtn">Sign in</button>
+        <button class="btn alt" id="backFromLogin">Back</button>
+      </div>
+      <div id="loginErr" class="err"></div>
+      <div class="loginLinks"><a id="forgotLink">Can't access your account?</a></div>
+    </div>
+    <div id="stepSignup" class="hidden">
+      <h2>Create account</h2>
+      <div class="small"><b id="signupUnameLabel"></b> is available.</div>
+      <label for="signupPass">Password</label>
+      <input type="password" id="signupPass">
+      <label for="signupQuestion">Backup security question</label>
+      <input type="text" id="signupQuestion">
+      <label for="signupAnswer">Security answer</label>
+      <input type="text" id="signupAnswer">
+      <div style="margin-top:16px;display:flex;gap:8px">
+        <button class="btn" id="signupBtn">Create account</button>
+        <button class="btn alt" id="backFromSignup">Back</button>
+      </div>
+      <div id="signupErr" class="err"></div>
+    </div>
+    <div id="stepForgot" class="hidden">
+      <h2>Reset password</h2>
+      <div class="small">for <b id="forgotUnameLabel"></b></div>
+      <div id="forgotQuestion" class="small" style="margin-top:8px"></div>
+      <label for="forgotAnswer">Security answer</label>
+      <input type="text" id="forgotAnswer">
+      <label for="forgotNewPass">New password</label>
+      <input type="password" id="forgotNewPass">
+      <div style="margin-top:16px;display:flex;gap:8px">
+        <button class="btn" id="forgotBtn">Reset password</button>
+        <button class="btn alt" id="backFromForgot">Back</button>
+      </div>
+      <div id="forgotErr" class="err"></div>
+    </div>
+    <div class="stayrow"><input type="checkbox" id="stayCheckbox" checked><label for="stayCheckbox" style="margin:0;font-weight:normal">Stay signed in (remember my username)</label></div>
   </div>
 </div>
 
 <div id="app" class="hidden">
 <header>
   <div class="glogo"><b class="c1">u</b><b class="c2">o</b><b class="c3">o</b><b class="c4">g</b><b class="c5">l</b><b class="c6">e</b><span class="plus">+</span></div>
-  <div style="flex:1;max-width:520px">
+  <div style="flex:1;max-width:480px">
     <div class="searchWrap">
-      <input type="text" id="search" placeholder="Search people, tags, or posts">
+      <input type="text" id="search" placeholder="Search for people, pages, or posts">
       <button class="searchBtn" id="searchBtn" type="button"><span data-icon="search"></span></button>
     </div>
     <div id="searchHint" class="small hidden"></div>
@@ -146,80 +230,128 @@ button.link:hover{color:var(--blue)}
   <div class="hdr-right">
     <span id="whoami"></span>
     <div class="bellbox">
-      <div class="bell" id="bellBtn"><span data-icon="bell"></span><span class="badge hidden" id="bellBadge">0</span></div>
-      <div class="notifdrop hidden" id="notifDrop"></div>
+      <div class="notifbadge hidden" id="bellBtn"><span id="bellCount">0</span></div>
+      <div class="dropmenu notifdrop hidden" id="notifDrop"></div>
     </div>
+    <button class="btn alt" id="shareBtn" type="button">+ Share</button>
     <div class="idbox">
-      <div class="hdr-avatar" id="hdrAvatar">?</div>
-      <div class="iddrop hidden" id="idDrop">
-        <button class="link" id="switchIdBtn">Log in / switch identity</button>
+      <div class="hdr-avatar" id="hdrAvatar"></div>
+      <span class="caret">&#9662;</span>
+      <div class="dropmenu hidden" id="idDrop">
+        <button id="myProfileLink">My profile</button>
+        <button id="editProfileLink">Edit profile</button>
+        <button id="switchIdBtn">Log in / switch identity</button>
       </div>
     </div>
   </div>
 </header>
-<nav>
-  <button data-tab="all" class="active">All</button>
-  <button data-tab="following">Following</button>
-  <button data-tab="photos">Photos</button>
-  <button data-tab="profile">My Profile</button>
-</nav>
+<div class="subnav">
+  <div class="sectionSwitch">
+    <button id="sectionSwitchBtn" type="button"><span data-icon="home"></span><span id="sectionLabel">Home</span><span class="caret">&#9662;</span></button>
+    <div class="sectionMenu hidden" id="sectionMenu">
+      <button data-section="home">Home</button>
+      <button data-section="communities">Communities</button>
+    </div>
+  </div>
+  <nav>
+    <button data-tab="all" class="active">All</button>
+    <button data-tab="explore">Explore</button>
+    <button data-tab="following">Following</button>
+    <button data-tab="photos">Photos</button>
+  </nav>
+  <div class="subnav-right"><span class="statusdot" id="statusDot" title="Relay status"></span></div>
+</div>
 
 <div id="layout">
-  <div class="rail">
-    <button data-tab="all" class="active" title="Home"><span data-icon="home"></span></button>
-    <button data-tab="profile" title="Profile"><span data-icon="person"></span></button>
-    <button data-tab="photos" title="Photos"><span data-icon="photo"></span></button>
-    <button data-tab="following" title="Following"><span data-icon="people"></span></button>
-  </div>
-  <div class="col-main">
-    <div class="panel" id="composePanel">
-      <textarea id="composeText" rows="2" placeholder="Share what's new..."></textarea>
-      <input type="text" id="composeImg" placeholder="Image URL (must be https://files.catbox.moe/...)" style="margin-top:6px">
-      <div style="margin-top:8px;display:flex;gap:8px;align-items:center">
-        <button class="btn" id="postBtn">Share</button>
-        <button class="btn alt" id="catboxBtn" type="button">Open Catbox</button>
-        <span class="small" id="composeMsg"></span>
+  <div id="profileBanner" class="hidden"></div>
+  <div id="profileTabsBar" class="hidden"></div>
+
+  <div id="board">
+    <div id="colLeft">
+      <div class="panel compose" id="composePanel">
+        <textarea id="composeText" placeholder="Share what's new..."></textarea>
+        <div class="composeIcons">
+          <button type="button" class="cicon active" id="cIconText"><span data-icon="text"></span>Text</button>
+          <button type="button" class="cicon" id="cIconPhotos"><span data-icon="photo"></span>Photos</button>
+          <button type="button" class="cicon" id="cIconVideo"><span data-icon="video"></span>Video</button>
+        </div>
+        <div class="composeExtra hidden" id="composeExtra">
+          <input type="text" id="composeImg" placeholder="Image URL (https://files.catbox.moe/...)">
+          <input type="text" id="composeVideo" class="hidden" placeholder="Video URL (https://files.catbox.moe/....mp4, .webm, .mov)">
+          <div><button class="btn alt" id="catboxBtn" type="button">Open Catbox</button></div>
+        </div>
+        <div class="composeActions">
+          <button class="btn green" id="postBtn" type="button">Share</button>
+          <span class="small" id="composeMsg"></span>
+        </div>
+      </div>
+      <div class="panel explore-card" id="exploreCard">
+        <div class="explore-banner">Explore uoogle+</div>
+        <div class="explore-cats" id="exploreCats"></div>
+      </div>
+      <div id="hotCard" class="hidden">
+        <div class="panel hot-head"><h2>What's hot and recommended</h2><b>These posts are popular on uoogle+</b></div>
+        <div class="hotPosts" id="hotPosts" style="margin-top:18px"></div>
       </div>
     </div>
-    <div class="panel hidden" id="profileViewPanel"></div>
-    <div class="panel hidden" id="photosPanel">
-      <div style="font-weight:bold;margin-bottom:8px">Photos</div>
-      <div id="photoGrid" class="photo-grid"></div>
+    <div id="colRight">
+      <div class="small" id="feedEmpty">Loading posts…</div>
     </div>
-    <div class="panel" id="feed"><div class="small">Loading posts…</div></div>
   </div>
-  <div class="col-side">
-    <div class="panel"><div id="status">Connecting to relays…</div></div>
-    <div class="panel">
-      <div style="font-weight:bold;margin-bottom:6px">You may know</div>
-      <div id="suggestList" class="small">Nobody new yet.</div>
+
+  <div class="fullpanel hidden" id="photosPanel">
+    <div class="photo-grid" id="photoGrid"></div>
+  </div>
+
+  <div class="panel fullpanel hidden" id="profileAboutPanel">
+    <div id="aboutBioView" class="small"></div>
+    <div id="aboutOwnControls" class="hidden">
+      <div class="about-block">
+        <h3>Edit profile</h3>
+        <input type="text" id="profDisplay" placeholder="Display name">
+        <input type="text" id="profBio" placeholder="Bio">
+        <input type="text" id="profAvatar" placeholder="Avatar image URL (files.catbox.moe, must be square)">
+        <button class="btn alt" id="saveProfBtn" type="button">Save profile</button>
+        <div class="small" id="profErr" style="margin-top:4px"></div>
+      </div>
+      <div class="about-block">
+        <h3>Change password</h3>
+        <input type="password" id="oldPassField" placeholder="current password">
+        <input type="password" id="newPassField" placeholder="new password">
+        <button class="btn alt" id="changePassBtn" type="button">Change password</button>
+        <div class="small" id="changePassErr" style="margin-top:4px"></div>
+      </div>
+      <div class="about-block">
+        <h3>Following</h3>
+        <div id="followList" class="small">None yet.</div>
+      </div>
     </div>
-    <div class="panel">
-      <div style="font-weight:bold;margin-bottom:6px">Trending on uoogle+</div>
-      <div id="trendList" class="small">No hashtags yet.</div>
+  </div>
+
+  <div class="communities-wrap hidden" id="communitiesSection">
+    <div class="communities-head"><h1>Communities you've joined</h1></div>
+    <div class="community-grid" id="communityJoinedGrid"></div>
+    <div class="section-title">Create a community</div>
+    <div class="panel create-community">
+      <input type="text" id="newCommunityName" placeholder="Community name">
+      <input type="text" id="newCommunityDesc" placeholder="Description">
+      <div><button class="btn" id="createCommunityBtn" type="button">Create Community</button></div>
+      <div class="small" id="communityErr"></div>
     </div>
-    <div class="panel" id="editProfilePanel">
-      <div style="font-weight:bold;margin-bottom:6px">Edit profile</div>
-      <input type="text" id="profDisplay" placeholder="Display name" style="margin-bottom:6px">
-      <input type="text" id="profBio" placeholder="Bio" style="margin-bottom:6px">
-      <input type="text" id="profAvatar" placeholder="Avatar image URL (files.catbox.moe, must be square)" style="margin-bottom:6px">
-      <button class="btn alt" id="saveProfBtn">Save profile</button>
-      <div class="small" id="profErr" style="margin-top:4px"></div>
-    </div>
-    <div class="panel">
-      <div style="font-weight:bold;margin-bottom:6px">Following</div>
-      <div id="followList" class="small">None yet.</div>
-    </div>
+    <div class="section-title">All communities</div>
+    <div class="community-grid" id="communityAllGrid"></div>
   </div>
 </div>
 </div>
 
 <script type="module">
-import { SimplePool, finalizeEvent, getPublicKey } from 'https://cdn.jsdelivr.net/npm/nostr-tools@2.10.4/+esm';
+import { SimplePool, finalizeEvent, getPublicKey, verifyEvent } from 'https://cdn.jsdelivr.net/npm/nostr-tools@2.10.4/+esm';
 
 const RELAYS = ["wss://relay.damus.io","wss://nos.lol","wss://relay.nostr.band","wss://relay.primal.net"];
 const APP_NAMESPACE = "uoogle-plus-v1";
+const ACCOUNT_KIND = 13370;
 const IMG_HOST = "files.catbox.moe";
+const PBKDF2_ITER = 150000;
 const pool = new SimplePool();
 
 function lsGet(k,f){ try{ const v=localStorage.getItem(k); return v===null?f:JSON.parse(v);}catch(e){return f;} }
@@ -227,14 +359,118 @@ function lsSet(k,v){ try{ localStorage.setItem(k, JSON.stringify(v)); }catch(e){
 
 async function sha256Bytes(str){ const b=await crypto.subtle.digest('SHA-256', new TextEncoder().encode(str)); return new Uint8Array(b); }
 function bytesToHex(b){ return Array.from(b).map(x=>x.toString(16).padStart(2,'0')).join(''); }
+function hexToBytes(hex){ const b=new Uint8Array(hex.length/2); for(let i=0;i<b.length;i++) b[i]=parseInt(hex.substr(i*2,2),16); return b; }
 async function sha256Hex(str){ return bytesToHex(await sha256Bytes(str)); }
 function normUser(u){ return (u||'').trim().toLowerCase(); }
+async function randomBytes(n){ const b=new Uint8Array(n); crypto.getRandomValues(b); return b; }
 
 async function keysForUsername(username){
   const secretKey = await sha256Bytes('uoogle-account-v1:'+normUser(username));
   const pubkey = getPublicKey(secretKey);
   const tag = '@' + bytesToHex(secretKey).slice(0,6).toUpperCase();
   return { secretKey, pubkey, tag };
+}
+
+async function pbkdf2Key(secretStr, saltBytes){
+  const material = await crypto.subtle.importKey('raw', new TextEncoder().encode(secretStr), {name:'PBKDF2'}, false, ['deriveBits']);
+  const bits = await crypto.subtle.deriveBits({name:'PBKDF2', salt: saltBytes, iterations: PBKDF2_ITER, hash:'SHA-256'}, material, 256);
+  return new Uint8Array(bits);
+}
+async function aesEncrypt(keyBytes, plainBytes){
+  const key = await crypto.subtle.importKey('raw', keyBytes, 'AES-GCM', false, ['encrypt']);
+  const iv = await randomBytes(12);
+  const ct = await crypto.subtle.encrypt({name:'AES-GCM', iv}, key, plainBytes);
+  return { iv: bytesToHex(iv), ct: bytesToHex(new Uint8Array(ct)) };
+}
+async function aesDecrypt(keyBytes, ivHex, ctHex){
+  const key = await crypto.subtle.importKey('raw', keyBytes, 'AES-GCM', false, ['decrypt']);
+  const pt = await crypto.subtle.decrypt({name:'AES-GCM', iv: hexToBytes(ivHex)}, key, hexToBytes(ctHex));
+  return new Uint8Array(pt);
+}
+
+async function fetchAccountRecords(username){
+  const k = await keysForUsername(username);
+  try{
+    const events = await pool.querySync(RELAYS, {kinds:[ACCOUNT_KIND], authors:[k.pubkey], "#t":[APP_NAMESPACE], limit:500});
+    return (events||[]).filter(ev=>{ try{ return verifyEvent(ev); }catch(e){ return false; } });
+  }catch(e){ return []; }
+}
+function parseAccountEvents(events){
+  const parsed = events.map(e=>{ try{ return {ev:e, data: JSON.parse(e.content)}; }catch(err){ return null; } }).filter(Boolean);
+  parsed.sort((a,b)=> a.ev.created_at - b.ev.created_at || (a.ev.id < b.ev.id ? -1 : 1));
+  const genesis = parsed.find(p=>p.data.type==='create') || null;
+  return { genesis, all: parsed };
+}
+async function createAccount(username, password, question, answer){
+  let identitySecretKey, pubkey;
+  for(let tries=0; tries<3; tries++){
+    identitySecretKey = await randomBytes(32);
+    try{ pubkey = getPublicKey(identitySecretKey); break; }catch(e){ pubkey=null; }
+  }
+  const pwSalt = await randomBytes(16), ansSalt = await randomBytes(16);
+  const pwKey = await pbkdf2Key(password, pwSalt);
+  const ansKey = await pbkdf2Key(normUser(answer), ansSalt);
+  const encByPassword = await aesEncrypt(pwKey, identitySecretKey);
+  const encByAnswer = await aesEncrypt(ansKey, identitySecretKey);
+  const content = JSON.stringify({
+    type:'create', username: normUser(username), question,
+    passwordHash: await sha256Hex('uoogle-pw:'+password),
+    answerHash: await sha256Hex('uoogle-ans:'+normUser(answer)),
+    identityPubkey: pubkey,
+    encByPassword: {salt:bytesToHex(pwSalt), iv:encByPassword.iv, ct:encByPassword.ct},
+    encByAnswer: {salt:bytesToHex(ansSalt), iv:encByAnswer.iv, ct:encByAnswer.ct}
+  });
+  const k = await keysForUsername(username);
+  const evt = { kind: ACCOUNT_KIND, created_at:Math.floor(Date.now()/1000), tags:[["t",APP_NAMESPACE],["u",normUser(username)]], content, pubkey:k.pubkey };
+  pool.publish(RELAYS, finalizeEvent(evt, k.secretKey));
+  return { secretKey: identitySecretKey, pubkey, tag: k.tag, username: normUser(username) };
+}
+async function tryLoginWithPassword(username, password){
+  const {genesis, all} = parseAccountEvents(await fetchAccountRecords(username));
+  if(!genesis) return {ok:false, reason:'notfound'};
+  for(const c of all.slice().reverse()){
+    if(!c.data.encByPassword) continue;
+    try{
+      const key = await pbkdf2Key(password, hexToBytes(c.data.encByPassword.salt));
+      const secretKey = await aesDecrypt(key, c.data.encByPassword.iv, c.data.encByPassword.ct);
+      const pubkey = getPublicKey(secretKey);
+      if(pubkey === genesis.data.identityPubkey){
+        const kd = await keysForUsername(username);
+        return {ok:true, secretKey, pubkey, tag:kd.tag, username:normUser(username)};
+      }
+    }catch(e){}
+  }
+  return {ok:false, reason:'badpass'};
+}
+async function tryLoginWithAnswer(username, answer){
+  const {genesis, all} = parseAccountEvents(await fetchAccountRecords(username));
+  if(!genesis) return {ok:false};
+  for(const c of all.slice().reverse()){
+    if(!c.data.encByAnswer) continue;
+    try{
+      const key = await pbkdf2Key(normUser(answer), hexToBytes(c.data.encByAnswer.salt));
+      const secretKey = await aesDecrypt(key, c.data.encByAnswer.iv, c.data.encByAnswer.ct);
+      const pubkey = getPublicKey(secretKey);
+      if(pubkey === genesis.data.identityPubkey) return {ok:true, secretKey};
+    }catch(e){}
+  }
+  return {ok:false};
+}
+async function publishPasswordUpdate(username, identitySecretKey, newPassword){
+  const pwSalt = await randomBytes(16);
+  const pwKey = await pbkdf2Key(newPassword, pwSalt);
+  const enc = await aesEncrypt(pwKey, identitySecretKey);
+  const content = JSON.stringify({ type:'update', username:normUser(username), passwordHash: await sha256Hex('uoogle-pw:'+newPassword), encByPassword:{salt:bytesToHex(pwSalt), iv:enc.iv, ct:enc.ct} });
+  const k = await keysForUsername(username);
+  const evt = { kind: ACCOUNT_KIND, created_at:Math.floor(Date.now()/1000), tags:[["t",APP_NAMESPACE],["u",normUser(username)]], content, pubkey:k.pubkey };
+  pool.publish(RELAYS, finalizeEvent(evt, k.secretKey));
+}
+async function changePassword(oldPassword, newPassword){
+  if(!ME) return {ok:false};
+  const check = await tryLoginWithPassword(ME.username, oldPassword);
+  if(!check.ok || check.pubkey !== ME.pubkey) return {ok:false};
+  await publishPasswordUpdate(ME.username, ME.secretKey, newPassword);
+  return {ok:true};
 }
 
 let ME = null;
@@ -244,9 +480,10 @@ const relayStatus = {}; RELAYS.forEach(r=>relayStatus[r]=false);
 const relayFails = {}; RELAYS.forEach(r=>relayFails[r]=0);
 function renderStatus(){
   const n = Object.values(relayStatus).filter(Boolean).length;
-  const el2 = document.getElementById('status');
-  if(!el2) return;
-  el2.textContent = n===0 ? "No relays are currently reachable." : (n + " of " + RELAYS.length + " relays connected");
+  const dot = document.getElementById('statusDot');
+  if(!dot) return;
+  dot.classList.toggle('down', n===0);
+  dot.title = n===0 ? 'No relays are currently reachable.' : (n + ' of ' + RELAYS.length + ' relays connected');
 }
 async function connectRelay(url){
   try{
@@ -265,6 +502,15 @@ RELAYS.forEach(connectRelay);
 function validImageUrl(u){
   try{ const p = new URL(u); return p.protocol==='https:' && p.hostname===IMG_HOST; }catch(e){ return false; }
 }
+const VIDEO_EXTS = ['.mp4','.webm','.mov','.m4v','.ogv'];
+function validVideoUrl(u){
+  try{
+    const p = new URL(u);
+    if(p.protocol!=='https:' || p.hostname!==IMG_HOST) return false;
+    const path = p.pathname.toLowerCase();
+    return VIDEO_EXTS.some(x=>path.endsWith(x));
+  }catch(e){ return false; }
+}
 function isSquareImage(url){
   return new Promise(resolve=>{
     const img = new Image();
@@ -274,15 +520,21 @@ function isSquareImage(url){
   });
 }
 
+const COMMUNITY_KIND = 32201;
 const posts = new Map();
 const reactions = new Map();
 const reshares = new Map();
 const profiles = new Map();
+const communities = new Map();
+const followListsByUser = new Map();
+const communityListsByUser = new Map();
 let following = [];
+let joinedCommunities = [];
+let currentSection = 'home';
 let currentTab = 'all';
+let profileSubtab = 'posts';
 let searchQuery = '';
 let viewingPubkey = null;
-const dismissedSuggestions = new Set();
 
 function el(tag, attrs, text){
   const n = document.createElement(tag);
@@ -292,15 +544,12 @@ function el(tag, attrs, text){
 }
 const ICON_PATHS = {
   search:'M15.5 14h-.79l-.28-.27a6.5 6.5 0 1 0-.7.7l.27.28v.79l5 5L20.49 19l-5-5zM9.5 14A4.5 4.5 0 1 1 9.5 5a4.5 4.5 0 0 1 0 9z',
-  bell:'M12 22a2 2 0 0 0 2-2h-4a2 2 0 0 0 2 2zm6-6.68V11a6 6 0 0 0-4.5-5.81V4.5a1.5 1.5 0 0 0-3 0v.69A6 6 0 0 0 6 11v4.32L4 17.5V19h16v-1.5z',
   home:'M12 3.1 3 10.5V21h6v-6h6v6h6V10.5z',
   person:'M12 12a5 5 0 1 0 0-10 5 5 0 0 0 0 10zm0 2.5c-4.42 0-9 2.19-9 5V22h18v-2.5c0-2.81-4.58-5-9-5z',
   photo:'M20 5H4a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2zM8.5 12.5l2.6 3.13L14.7 11l4.8 6H4.5z',
   people:'M16.5 11a2.99 2.99 0 1 0 0-6 2.99 2.99 0 0 0 0 6zM8 11a2.99 2.99 0 1 0 0-6 2.99 2.99 0 0 0 0 6zm8.5 2c-1.83 0-5.5.92-5.5 2.75V19h11v-3.25C22 14.92 18.33 13 16.5 13zM8 13c-2.33 0-7 1.17-7 3.5V19h7v-2.25c0-.85.33-2.27 2.37-3.35A9.6 9.6 0 0 0 8 13z',
-  comment:'M20 2H4a2 2 0 0 0-2 2v18l4-4h14a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2z',
-  share:'M18 16.08a2.94 2.94 0 0 0-1.96.77L8.91 12.7a3 3 0 0 0 0-1.4l7.05-4.11a3 3 0 1 0-.89-2.12c0 .24.04.47.09.7L8.04 9.81a3 3 0 1 0 0 4.38l7.12 4.15c-.05.21-.08.43-.08.66a3 3 0 1 0 2.92-2.92z',
-  plusone:'M2 21h4V9H2zM22.5 10.5c0-1.1-.9-2-2-2h-5.55l.84-4.05.03-.32a1.5 1.5 0 0 0-.44-1.06L14.17 2 7.59 8.59A2 2 0 0 0 7 10v8a2 2 0 0 0 2 2h9a2 2 0 0 0 1.84-1.21l3-7A2 2 0 0 0 23 11z',
-  x:'M18.3 5.71 12 12.01l-6.3-6.3-1.41 1.41 6.3 6.3-6.3 6.3 1.41 1.41 6.3-6.3 6.3 6.3 1.41-1.41-6.3-6.3 6.3-6.3z'
+  video:'M17 10.5V7a1 1 0 0 0-1-1H4a1 1 0 0 0-1 1v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-3.5l4 4v-11z',
+  text:'M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04a1 1 0 0 0 0-1.41l-2.34-2.34a1 1 0 0 0-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z'
 };
 function iconEl(name, size){
   const NS='http://www.w3.org/2000/svg';
@@ -313,26 +562,41 @@ function iconEl(name, size){
   svg.appendChild(p);
   return svg;
 }
-function initIcons(){ document.querySelectorAll('[data-icon]').forEach(node=>{ node.textContent=''; node.appendChild(iconEl(node.dataset.icon)); }); }
+function initIcons(){ document.querySelectorAll('[data-icon]').forEach(node=>{ node.textContent=''; node.appendChild(iconEl(node.dataset.icon, ['text','photo','video'].includes(node.dataset.icon)?24:16)); }); }
 function ensureProfile(pubkey, username, tag){
   if(!profiles.has(pubkey)) profiles.set(pubkey, {username, tag, displayName:username, bio:'', avatar:''});
 }
 function isReply(e){ return e.tags.some(t=>t[0]==='e' && t[3]==='reply'); }
 function replyParent(e){ const t=e.tags.find(t=>t[0]==='e'&&t[3]==='reply'); return t?t[1]:null; }
 function sortNewest(a,b){ if(b.created_at!==a.created_at) return b.created_at-a.created_at; return a.id<b.id?1:-1; }
-
-function avatarEl(prof){
+function fmtDate(t){ return new Date(t*1000).toLocaleDateString(undefined,{year:'numeric',month:'short',day:'numeric'}); }
+function fmtDateTime(t){ return new Date(t*1000).toLocaleString(); }
+function slugify(name){ return name.trim().toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/(^-|-$)/g,'') || ('c'+Date.now()); }
+function followerCount(pubkey){ let n=0; followListsByUser.forEach(v=>{ if(v.list.includes(pubkey)) n++; }); return n; }
+function communityMemberCount(slug){
+  const set = new Set();
+  communityListsByUser.forEach((v,pk)=>{ if(v.list.includes(slug)) set.add(pk); });
+  const c = communities.get(slug); if(c) set.add(c.pubkey);
+  return set.size;
+}
+function tileColor(slug){
+  const colors=['#7bc9a0','#6fa8dc','#e08f7d','#e6b84f','#a58bd0','#5fb8b0'];
+  let h=0; for(const ch of slug) h=(h*31+ch.charCodeAt(0))>>>0;
+  return colors[h%colors.length];
+}
+function avatarEl(prof, size){
   const box = el('div',{class:'avatar'});
-  if(prof && prof.avatar){ box.appendChild(el('img',{src:prof.avatar, alt:'avatar'})); }
-  else box.textContent = (prof?prof.username[0]:'?').toUpperCase();
+  if(size){ box.style.width=size+'px'; box.style.height=size+'px'; }
+  if(prof && prof.avatar) box.appendChild(el('img',{src:prof.avatar, alt:'avatar'}));
+  else box.appendChild(iconEl('person', Math.round((size||36)*0.6)));
   return box;
 }
+function displayName(pubkey){ const p=profiles.get(pubkey); return p?(p.displayName||p.username):'unknown'; }
 
 function renderPhotos(){
   const grid = document.getElementById('photoGrid');
   grid.textContent = '';
-  let authorFilter = null;
-  if(viewingPubkey) authorFilter = viewingPubkey; else if(ME) authorFilter = ME.pubkey;
+  let authorFilter = viewingPubkey || (ME ? ME.pubkey : null);
   let list = Array.from(posts.values());
   if(authorFilter) list = list.filter(e=>e.pubkey===authorFilter);
   const imgs = [];
@@ -340,94 +604,133 @@ function renderPhotos(){
     const t = e.tags.find(t=>t[0]==='image');
     if(t && validImageUrl(t[1])) imgs.push(t[1]);
   });
-  if(imgs.length===0){ grid.appendChild(el('div',{class:'small'},'No photos yet.')); return; }
+  if(imgs.length===0){ grid.appendChild(el('div',{class:'photo-grid-empty'},'No photos yet.')); return; }
   imgs.forEach(u=>{
+    const cell = el('div',{class:'photo-cell'});
     const img = el('img',{src:u, alt:'photo'});
     img.onclick = ()=>window.open(u,'_blank');
-    grid.appendChild(img);
+    cell.appendChild(img);
+    grid.appendChild(cell);
   });
 }
-function renderSuggestions(){
-  const box = document.getElementById('suggestList');
-  box.textContent = '';
-  const items = Array.from(profiles.entries()).filter(([pk])=> pk!==(ME?ME.pubkey:null) && !following.includes(pk) && !dismissedSuggestions.has(pk)).slice(0,4);
-  if(items.length===0){ box.textContent='Nobody new yet.'; return; }
-  items.forEach(([pk,prof])=>{
-    const row = el('div',{class:'suggest-row'});
-    row.appendChild(avatarEl(prof));
-    const info = el('div',{class:'info'});
-    info.appendChild(el('div',{class:'name'}, prof.displayName||prof.username));
-    info.appendChild(el('div',{class:'small'}, prof.tag));
-    row.appendChild(info);
-    const addBtn = el('button',{class:'link'}, 'Add');
-    addBtn.onclick = ()=>{ toggleFollow(pk); renderSuggestions(); };
-    row.appendChild(addBtn);
-    const xBtn = el('button',{class:'link'}, '\u2715');
-    xBtn.onclick = ()=>{ dismissedSuggestions.add(pk); renderSuggestions(); };
-    row.appendChild(xBtn);
-    box.appendChild(row);
-  });
-}
-function renderTrending(){
-  const box = document.getElementById('trendList');
-  box.textContent = '';
-  const counts = new Map();
-  Array.from(posts.values()).forEach(e=>{
-    const tags = e.content.match(/#\w+/g) || [];
-    tags.forEach(t=>counts.set(t, (counts.get(t)||0)+1));
-  });
-  const top = Array.from(counts.entries()).sort((a,b)=>b[1]-a[1]).slice(0,5);
-  if(top.length===0){ box.textContent='No hashtags yet.'; return; }
-  top.forEach(([tag,count])=>{
-    const row = el('div',{class:'trend-row'}, tag + ' \u00b7 ' + count + ' posts');
-    row.onclick = ()=>{ document.getElementById('search').value = tag; searchQuery = tag; renderFeed(); };
-    box.appendChild(row);
-  });
-}
+
 function notificationList(){
   if(!ME) return [];
   const items = [];
   reactions.forEach((m, postId)=>{
     const p = posts.get(postId);
     if(p && p.pubkey===ME.pubkey){
-      m.forEach(ev=>{ if(ev.pubkey!==ME.pubkey) items.push({time:ev.created_at, text:(profiles.get(ev.pubkey)?.username||'someone')+' gave +1 to your post', postId}); });
+      m.forEach(ev=>{ if(ev.pubkey!==ME.pubkey) items.push({time:ev.created_at, text:displayName(ev.pubkey)+' gave +1 to your post', postId}); });
     }
   });
   reshares.forEach(ev=>{
     const postId = (ev.tags.find(t=>t[0]==='e')||[])[1];
     const p = posts.get(postId);
-    if(p && p.pubkey===ME.pubkey && ev.pubkey!==ME.pubkey) items.push({time:ev.created_at, text:(profiles.get(ev.pubkey)?.username||'someone')+' shared your post', postId});
+    if(p && p.pubkey===ME.pubkey && ev.pubkey!==ME.pubkey) items.push({time:ev.created_at, text:displayName(ev.pubkey)+' shared your post', postId});
   });
   posts.forEach(ev=>{
     const parentId = replyParent(ev);
     if(parentId){
       const p = posts.get(parentId);
-      if(p && p.pubkey===ME.pubkey && ev.pubkey!==ME.pubkey) items.push({time:ev.created_at, text:(profiles.get(ev.pubkey)?.username||'someone')+' commented on your post', postId:parentId});
+      if(p && p.pubkey===ME.pubkey && ev.pubkey!==ME.pubkey) items.push({time:ev.created_at, text:displayName(ev.pubkey)+' commented on your post', postId:parentId});
     }
   });
   return items.sort((a,b)=>b.time-a.time);
 }
 function renderBell(){
-  if(!ME){ document.getElementById('bellBadge').classList.add('hidden'); return; }
+  const badge = document.getElementById('bellBtn');
+  if(!ME){ badge.classList.add('hidden'); return; }
   const seen = lsGet('uoogle_notif_seen_'+ME.username, 0);
-  const items = notificationList();
-  const unread = items.filter(i=>i.time>seen).length;
-  const badge = document.getElementById('bellBadge');
-  if(unread>0){ badge.textContent = unread; badge.classList.remove('hidden'); } else badge.classList.add('hidden');
+  const unread = notificationList().filter(i=>i.time>seen).length;
+  document.getElementById('bellCount').textContent = unread;
+  badge.classList.remove('hidden');
 }
+
+function renderComments(parentId){
+  const kids = Array.from(posts.values()).filter(c=>replyParent(c)===parentId).sort((a,b)=>a.created_at-b.created_at);
+  const frag = document.createDocumentFragment();
+  kids.forEach(c=>{
+    const prof = profiles.get(c.pubkey);
+    const row = el('div',{class:'comment', id:'p-'+c.id});
+    row.appendChild(avatarEl(prof, 28));
+    const body = el('div');
+    const head = el('div',{class:'comment-head'});
+    const nm = el('b',{}, displayName(c.pubkey)); nm.style.cursor='pointer'; nm.onclick=()=>viewProfile(c.pubkey);
+    head.appendChild(nm);
+    head.appendChild(el('span',{}, fmtDateTime(c.created_at)));
+    body.appendChild(head);
+    body.appendChild(el('div',{class:'comment-text'}, c.content));
+    const sub = renderComments(c.id);
+    if(sub.childNodes.length){ const w = el('div',{class:'comment-replies'}); w.appendChild(sub); body.appendChild(w); }
+    row.appendChild(body);
+    frag.appendChild(row);
+  });
+  return frag;
+}
+
+function renderPost(e, noId){
+  const wrap = el('div',{class:'post'});
+  if(!noId) wrap.id = 'p-'+e.id;
+  const main = el('div',{class:'post-main'});
+  const prof = profiles.get(e.pubkey);
+  const head = el('div',{class:'post-head'});
+  head.appendChild(avatarEl(prof, 46));
+  const who = el('div');
+  const uname = el('div',{class:'uname'}, displayName(e.pubkey));
+  uname.onclick = ()=>viewProfile(e.pubkey);
+  who.appendChild(uname);
+  who.appendChild(el('div',{class:'meta'}, 'Shared publicly - ' + fmtDate(e.created_at) + (prof?(' - '+prof.tag):'')));
+  head.appendChild(who);
+  main.appendChild(head);
+  main.appendChild(el('div',{class:'post-body'}, e.content));
+  const imgTag = e.tags.find(t=>t[0]==='image');
+  if(imgTag && validImageUrl(imgTag[1])) main.appendChild(el('img',{class:'pimg', src:imgTag[1], alt:'post image'}));
+  const vidTag = e.tags.find(t=>t[0]==='video');
+  if(vidTag && validVideoUrl(vidTag[1])){
+    const v = el('video',{class:'pvid', src:vidTag[1], controls:'', preload:'metadata', playsinline:''});
+    main.appendChild(v);
+  }
+  wrap.appendChild(main);
+
+  const reshareCount = Array.from(reshares.values()).filter(r=>(r.tags.find(t=>t[0]==='e')||[])[1]===e.id).length;
+  const likeCount = (reactions.get(e.id)||new Map()).size;
+  const iReacted = ME && (reactions.get(e.id)||new Map()).has(ME.pubkey);
+  const footer = el('div',{class:'post-footer'});
+  const plusBtn = el('button',{class:'plusBtn'+(iReacted?' reacted':''), title:'+1'}, '+' + (likeCount||''));
+  plusBtn.onclick = ()=>react(e.id);
+  footer.appendChild(plusBtn);
+  const commentInput = el('input',{type:'text', class:'commentInline', placeholder: ME ? 'Add a comment...' : 'Log in to comment'});
+  if(!ME) commentInput.disabled = true;
+  commentInput.onkeydown = async (ev)=>{
+    if(ev.key==='Enter' && commentInput.value.trim()){
+      const val = commentInput.value; commentInput.value=''; commentInput.disabled=true;
+      await publishPost(val, null, e.id); commentInput.disabled=false;
+    }
+  };
+  footer.appendChild(commentInput);
+  const shareBtn = el('button',{class:'link'}, 'Share' + (reshareCount?(' ('+reshareCount+')'):''));
+  shareBtn.onclick = ()=>reshare(e.id);
+  footer.appendChild(shareBtn);
+  wrap.appendChild(footer);
+
+  const cm = renderComments(e.id);
+  if(cm.childNodes.length){ const box = el('div',{class:'comments'}); box.appendChild(cm); wrap.appendChild(box); }
+  return wrap;
+}
+function jumpTo(id){
+  const node = document.getElementById('p-'+id); if(!node) return;
+  node.scrollIntoView({behavior:'smooth', block:'center'});
+  node.classList.add('highlight'); setTimeout(()=>node.classList.remove('highlight'), 1500);
+}
+
 function renderFeed(){
-  renderSuggestions(); renderTrending(); renderBell();
-  document.getElementById('photosPanel').classList.toggle('hidden', currentTab!=='photos');
-  document.getElementById('feed').classList.toggle('hidden', currentTab==='photos');
-  document.getElementById('composePanel').classList.toggle('hidden', currentTab==='photos' || READONLY);
-  if(currentTab==='photos'){ renderPhotos(); return; }
-  const feed = document.getElementById('feed');
-  feed.textContent = '';
+  renderBell();
+  const colRight = document.getElementById('colRight');
+  Array.from(colRight.querySelectorAll('.post')).forEach(n=>n.remove());
   let list = Array.from(posts.values());
-  if(currentTab==='profileView' && viewingPubkey){ list = list.filter(e=>e.pubkey===viewingPubkey); }
-  else if(currentTab==='following'){ list = list.filter(e=> following.includes(e.pubkey) || (ME && e.pubkey===ME.pubkey)); }
-  else if(currentTab==='profile'){ list = ME ? list.filter(e=> e.pubkey===ME.pubkey) : []; }
-  if(searchQuery && currentTab!=='profileView'){
+  if(viewingPubkey) list = list.filter(e=>e.pubkey===viewingPubkey);
+  else if(currentTab==='following') list = list.filter(e=> following.includes(e.pubkey) || (ME && e.pubkey===ME.pubkey));
+  if(searchQuery){
     const q = searchQuery.toLowerCase();
     list = list.filter(e=>{
       const prof = profiles.get(e.pubkey);
@@ -436,119 +739,170 @@ function renderFeed(){
     });
   }
   const roots = list.filter(e=>!isReply(e)).sort(sortNewest);
-  if(roots.length===0){ feed.appendChild(el('div',{class:'small'},'No posts yet.')); return; }
-  roots.forEach(e=>feed.appendChild(renderPost(e)));
+  const emptyMsg = document.getElementById('feedEmpty');
+  if(roots.length===0){ emptyMsg.textContent='No posts yet.'; emptyMsg.classList.remove('hidden'); return; }
+  emptyMsg.classList.add('hidden');
+  roots.forEach(e=>colRight.appendChild(renderPost(e)));
 }
-
-function renderPost(e){
-  const wrap = el('div',{class:'post', id:'p-'+e.id});
-  const head = el('div',{class:'post-head'});
-  const prof = profiles.get(e.pubkey);
-  head.appendChild(avatarEl(prof));
-  const uname = el('span',{class:'uname'}, prof?(prof.displayName||prof.username):'unknown');
-  uname.onclick = ()=>viewProfile(e.pubkey);
-  head.appendChild(uname);
-  head.appendChild(el('span',{class:'utag'}, prof?prof.tag:''));
-  head.appendChild(el('span',{class:'time'}, new Date(e.created_at*1000).toLocaleString()));
-  wrap.appendChild(head);
-
-  const parentId = replyParent(e);
-  if(parentId && posts.has(parentId)){
-    const refLine = el('div',{class:'small'});
-    const link = el('a',{href:'#p-'+parentId, style:'color:#3c78d8;cursor:pointer'}, 'in reply to a post');
-    link.onclick = (ev)=>{ ev.preventDefault(); jumpTo(parentId); };
-    refLine.appendChild(link); wrap.appendChild(refLine);
-  }
-  wrap.appendChild(el('div',{class:'shared-publicly'}, 'Shared publicly'));
-  wrap.appendChild(el('div',{class:'post-body'}, e.content));
-  const imgTag = e.tags.find(t=>t[0]==='image');
-  if(imgTag && validImageUrl(imgTag[1])) wrap.appendChild(el('img',{class:'pimg', src:imgTag[1], alt:'post image'}));
-
-  const children = Array.from(posts.values()).filter(c=>replyParent(c)===e.id).sort(sortNewest);
-  const reshareCount = Array.from(reshares.values()).filter(r=>(r.tags.find(t=>t[0]==='e')||[])[1]===e.id).length;
-
-  const acts = el('div',{class:'icon-actions'});
-  const likeCount = (reactions.get(e.id)||new Map()).size;
-  const likeBtn = el('button',{}, '+1 (' + likeCount + ')');
-  likeBtn.onclick = ()=>react(e.id); acts.appendChild(likeBtn);
-  const commentBtn = el('button',{}, '\u{1F4AC} ' + children.length + ' comments');
-  commentBtn.onclick = ()=>toggleReplyBox(wrap, e.id); acts.appendChild(commentBtn);
-  const shareBtn = el('button',{}, '\u2197 Share (' + reshareCount + ')');
-  shareBtn.onclick = ()=>reshare(e.id); acts.appendChild(shareBtn);
-  wrap.appendChild(acts);
-
-  if(children.length){
-    const childWrap = el('div',{class:'thread-children'});
-    children.forEach(c=>childWrap.appendChild(renderPost(c)));
-    wrap.appendChild(childWrap);
-  }
-  return wrap;
-}
-function toggleReplyBox(wrap, parentId){
-  let box = wrap.querySelector('.commentBox');
-  if(box){ box.remove(); return; }
-  box = el('div',{class:'commentBox'});
-  const ta = el('input',{type:'text', placeholder: ME ? 'Add a comment...' : 'Log in to comment'});
-  if(!ME) ta.disabled = true;
-  box.appendChild(ta);
-  const btn = el('button',{class:'btn'}, 'Comment');
-  btn.onclick = async ()=>{ if(!ME){ alert('Log in to comment.'); return; } await publishPost(ta.value, null, parentId); box.remove(); };
-  box.appendChild(btn); wrap.appendChild(box);
-}
-function jumpTo(id){
-  const node = document.getElementById('p-'+id); if(!node) return;
-  node.scrollIntoView({behavior:'smooth', block:'center'});
-  node.classList.add('highlight'); setTimeout(()=>node.classList.remove('highlight'), 1500);
+function renderHotCard(){
+  const box = document.getElementById('hotPosts');
+  box.textContent = '';
+  const all = Array.from(posts.values());
+  const scored = all.filter(e=>!isReply(e)).map(e=>{
+    const likes = (reactions.get(e.id)||new Map()).size;
+    const comments = all.filter(c=>replyParent(c)===e.id).length;
+    const shares = Array.from(reshares.values()).filter(r=>(r.tags.find(t=>t[0]==='e')||[])[1]===e.id).length;
+    return {e, score: likes*2 + comments*3 + shares*2};
+  }).filter(x=>x.score>0).sort((a,b)=>b.score-a.score).slice(0,5);
+  if(scored.length===0){ box.appendChild(el('div',{class:'small'},'Nothing is hot yet. +1 or comment on a post to get things started.')); return; }
+  scored.forEach(x=>box.appendChild(renderPost(x.e, true)));
 }
 function renderFollowList(){
   const c = document.getElementById('followList'); c.textContent='';
   if(following.length===0){ c.textContent='None yet.'; return; }
   following.forEach(pk=>{
     const row = el('div',{class:'follow-row'});
-    const prof = profiles.get(pk);
-    const nameEl = el('span',{}, prof?(prof.username+' '+prof.tag):pk.slice(0,10));
-    row.appendChild(nameEl);
+    row.appendChild(el('span',{}, displayName(pk)));
     const btn = el('button',{class:'link'}, 'Unfollow'); btn.onclick=()=>toggleFollow(pk);
     row.appendChild(btn); c.appendChild(row);
   });
 }
 
-async function viewProfile(pubkey){
-  viewingPubkey = pubkey; currentTab='profileView';
-  document.querySelectorAll('nav button').forEach(x=>x.classList.remove('active'));
-  document.getElementById('profileViewPanel').classList.remove('hidden');
-  await pool.subscribeManyEose(RELAYS, [
-    {kinds:[1], "#t":[APP_NAMESPACE], authors:[pubkey], limit:200},
-    {kinds:[30078], "#t":[APP_NAMESPACE], "#d":["uoogle-profile"], authors:[pubkey]}
-  ], { onevent: onAnyEvent });
-  renderProfilePanel(pubkey);
+function renderProfileBanner(pubkey){
+  const b = document.getElementById('profileBanner');
+  b.textContent='';
+  b.className = 'profile-banner';
+  const prof = profiles.get(pubkey);
+  const left = el('div',{class:'pb-left'});
+  left.appendChild(avatarEl(prof, 96));
+  left.appendChild(el('div',{class:'pb-name'}, displayName(pubkey)));
+  left.appendChild(el('div',{class:'pb-follow'}, followerCount(pubkey) + ' followers'));
+  if(ME && pubkey!==ME.pubkey){
+    const fbtn = el('button',{class:'btn alt'}, following.includes(pubkey)?'Unfollow':'Follow');
+    fbtn.onclick = ()=>toggleFollow(pubkey);
+    left.appendChild(fbtn);
+  }
+  const back = el('button',{class:'link'}, 'Back to feed');
+  back.style.color = '#cfe8d4';
+  back.onclick = ()=>{ viewingPubkey=null; profileSubtab='posts'; applyView(); };
+  left.appendChild(back);
+  b.appendChild(left);
+  const right = el('div',{class:'pb-right'});
+  right.appendChild(el('div',{class:'hill h3'}));
+  right.appendChild(el('div',{class:'hill h1'}));
+  right.appendChild(el('div',{class:'hill h2'}));
+  b.appendChild(right);
+}
+function renderProfileTabs(){
+  const bar = document.getElementById('profileTabsBar');
+  bar.textContent='';
+  bar.className = 'profile-tabsbar';
+  [['about','About'],['posts','Posts'],['photos','Photos']].forEach(([key,label])=>{
+    const btn = el('button',{}, label);
+    if(key===profileSubtab) btn.classList.add('active');
+    btn.onclick = ()=>{ profileSubtab=key; applyView(); };
+    bar.appendChild(btn);
+  });
+}
+function renderAbout(pubkey){
+  const isOwn = !!(ME && pubkey===ME.pubkey);
+  document.getElementById('aboutOwnControls').classList.toggle('hidden', !isOwn);
+  const view = document.getElementById('aboutBioView');
+  view.classList.toggle('hidden', isOwn);
+  if(!isOwn){
+    const prof = profiles.get(pubkey);
+    view.textContent = prof && prof.bio ? prof.bio : 'No bio yet.';
+  } else {
+    const prof = profiles.get(pubkey) || {};
+    if(document.activeElement && document.getElementById('aboutOwnControls').contains(document.activeElement)) { renderFollowList(); return; }
+    document.getElementById('profDisplay').value = prof.displayName || '';
+    document.getElementById('profBio').value = prof.bio || '';
+    document.getElementById('profAvatar').value = prof.avatar || '';
+    renderFollowList();
+  }
+}
+
+function communityTile(slug, c){
+  const tile = el('div',{class:'community-tile'});
+  const banner = el('div',{class:'community-banner'});
+  banner.style.background = tileColor(slug);
+  banner.appendChild(iconEl('people', 64));
+  tile.appendChild(banner);
+  const body = el('div',{class:'community-body'});
+  body.appendChild(el('div',{class:'community-name'}, c.name));
+  if(c.description) body.appendChild(el('div',{class:'community-meta'}, c.description));
+  body.appendChild(el('div',{class:'community-meta'}, communityMemberCount(slug) + ' members'));
+  const isJoined = joinedCommunities.includes(slug);
+  const btn = el('button',{class:'btn alt'}, isJoined ? 'Leave' : 'Join');
+  btn.onclick = ()=>toggleJoinCommunity(slug);
+  body.appendChild(btn);
+  tile.appendChild(body);
+  return tile;
+}
+function renderCommunities(){
+  const joinedGrid = document.getElementById('communityJoinedGrid');
+  const allGrid = document.getElementById('communityAllGrid');
+  joinedGrid.textContent=''; allGrid.textContent='';
+  const entries = Array.from(communities.entries()).sort((a,b)=>b[1].created_at-a[1].created_at);
+  const joined = entries.filter(([slug])=>joinedCommunities.includes(slug));
+  if(joined.length===0) joinedGrid.appendChild(el('div',{class:'small'}, ME ? 'You have not joined any communities yet.' : 'Log in to join communities.'));
+  joined.forEach(([slug,c])=>joinedGrid.appendChild(communityTile(slug,c)));
+  if(entries.length===0) allGrid.appendChild(el('div',{class:'small'},'No communities yet. Create the first one above.'));
+  entries.forEach(([slug,c])=>allGrid.appendChild(communityTile(slug,c)));
+}
+
+function applyView(){
+  const inCommunities = currentSection==='communities';
+  document.getElementById('communitiesSection').classList.toggle('hidden', !inCommunities);
+  document.querySelector('nav').classList.toggle('hidden', inCommunities);
+  document.getElementById('sectionLabel').textContent = inCommunities ? 'Communities' : 'Home';
+  const board = document.getElementById('board');
+  const photosPanel = document.getElementById('photosPanel');
+  const aboutPanel = document.getElementById('profileAboutPanel');
+  const banner = document.getElementById('profileBanner');
+  const tabsBar = document.getElementById('profileTabsBar');
+  if(inCommunities){
+    [board, photosPanel, aboutPanel, banner, tabsBar].forEach(n=>n.classList.add('hidden'));
+    renderCommunities(); renderBell();
+    return;
+  }
+  const viewingProfile = !!viewingPubkey;
+  banner.classList.toggle('hidden', !viewingProfile);
+  tabsBar.classList.toggle('hidden', !viewingProfile);
+  if(viewingProfile){ renderProfileBanner(viewingPubkey); renderProfileTabs(); }
+  const showAbout = viewingProfile && profileSubtab==='about';
+  const showPhotos = viewingProfile ? profileSubtab==='photos' : currentTab==='photos';
+  const showBoard = !showAbout && !showPhotos;
+  aboutPanel.classList.toggle('hidden', !showAbout);
+  photosPanel.classList.toggle('hidden', !showPhotos);
+  board.classList.toggle('hidden', !showBoard);
+  renderBell();
+  if(showAbout){ renderAbout(viewingPubkey); return; }
+  if(showPhotos){ renderPhotos(); return; }
+  const showCompose = !READONLY && (viewingProfile ? profileSubtab==='posts' : currentTab!=='explore');
+  document.getElementById('composePanel').classList.toggle('hidden', !showCompose);
+  document.getElementById('exploreCard').classList.toggle('hidden', viewingProfile || currentTab!=='all');
+  document.getElementById('hotCard').classList.toggle('hidden', viewingProfile || currentTab!=='explore');
+  if(!viewingProfile && currentTab==='explore') renderHotCard();
   renderFeed();
 }
-function renderProfilePanel(pubkey){
-  const p = document.getElementById('profileViewPanel');
-  p.textContent='';
-  const prof = profiles.get(pubkey);
-  const head = el('div',{class:'profileHead'});
-  head.appendChild(avatarEl(prof));
-  const info = el('div');
-  info.appendChild(el('div',{style:'font-weight:bold;font-size:16px'}, prof?(prof.displayName||prof.username):'Unknown user'));
-  info.appendChild(el('div',{class:'small'}, prof?(prof.username+' '+prof.tag):''));
-  if(prof && prof.bio) info.appendChild(el('div',{style:'margin-top:4px'}, prof.bio));
-  head.appendChild(info);
-  p.appendChild(head);
-  const btnRow = el('div',{});
-  const back = el('button',{class:'btn alt'}, 'Back to feed');
-  back.onclick = ()=>{ viewingPubkey=null; currentTab='all'; p.classList.add('hidden'); document.querySelector('nav button[data-tab="all"]').classList.add('active'); renderFeed(); };
-  btnRow.appendChild(back);
-  if(ME && pubkey!==ME.pubkey){
-    const fbtn = el('button',{class:'btn alt', style:'margin-left:8px'}, following.includes(pubkey)?'Unfollow':'Follow');
-    fbtn.onclick = ()=>{ toggleFollow(pubkey); renderProfilePanel(pubkey); };
-    btnRow.appendChild(fbtn);
-  }
-  p.appendChild(btnRow);
+
+async function viewProfile(pubkey){
+  viewingPubkey = pubkey; profileSubtab = 'posts'; currentSection = 'home';
+  document.querySelectorAll('nav button[data-tab]').forEach(x=>x.classList.remove('active'));
+  applyView();
+  try{
+    await pool.subscribeManyEose(RELAYS, [
+      {kinds:[1], "#t":[APP_NAMESPACE], authors:[pubkey], limit:200},
+      {kinds:[30078], "#t":[APP_NAMESPACE], "#d":["uoogle-profile"], authors:[pubkey]}
+    ], { onevent: onAnyEvent });
+  }catch(e){}
+  applyView();
 }
-function viewProfileByUsername(username){
-  keysForUsername(username).then(k=>viewProfile(k.pubkey));
+async function viewProfileByUsername(username){
+  const {genesis} = parseAccountEvents(await fetchAccountRecords(username));
+  if(!genesis || !genesis.data.identityPubkey){ alert('No uoogle+ account found for that username.'); return; }
+  viewProfile(genesis.data.identityPubkey);
 }
 
 function canPost(content){
@@ -568,19 +922,21 @@ function recordPost(content){
   lsSet('uoogle_antispam', state);
 }
 
-async function publishPost(content, imageUrl, replyTo){
-  if(!ME){ alert('Log in to post.'); return; }
-  content = (content||'').trim(); if(!content) return;
+async function publishPost(content, imageUrl, replyTo, videoUrl){
+  if(!ME){ alert('Log in to post.'); return false; }
+  content = (content||'').trim(); if(!content) return false;
   const err = canPost(content);
-  if(err){ document.getElementById('composeMsg').textContent = err; return; }
+  if(err){ document.getElementById('composeMsg').textContent = err; return false; }
   const tags = [["t",APP_NAMESPACE],["u",ME.username],["tag",ME.tag]];
   if(imageUrl && validImageUrl(imageUrl)) tags.push(["image", imageUrl]);
+  if(videoUrl && validVideoUrl(videoUrl)) tags.push(["video", videoUrl]);
   if(replyTo) tags.push(["e", replyTo, "", "reply"]);
   const evt = { kind:1, created_at: Math.floor(Date.now()/1000), tags, content, pubkey: ME.pubkey };
   const signed = finalizeEvent(evt, ME.secretKey);
   posts.set(signed.id, signed);
   pool.publish(RELAYS, signed);
-  recordPost(content); renderFeed();
+  recordPost(content); applyView();
+  return true;
 }
 async function react(postId){
   if(!ME){ alert('Log in to react.'); return; }
@@ -589,7 +945,7 @@ async function react(postId){
   const evt = { kind:7, created_at:Math.floor(Date.now()/1000), tags:[["e",postId],["t",APP_NAMESPACE]], content:"+", pubkey: ME.pubkey };
   const signed = finalizeEvent(evt, ME.secretKey);
   m.set(ME.pubkey, signed); reactions.set(postId, m);
-  pool.publish(RELAYS, signed); renderFeed();
+  pool.publish(RELAYS, signed); applyView();
 }
 async function reshare(postId){
   if(!ME){ alert('Log in to reshare.'); return; }
@@ -597,12 +953,12 @@ async function reshare(postId){
   const evt = { kind:6, created_at:Math.floor(Date.now()/1000), tags:[["e",postId],["t",APP_NAMESPACE]], content: JSON.stringify(orig), pubkey: ME.pubkey };
   const signed = finalizeEvent(evt, ME.secretKey);
   reshares.set(postId, signed);
-  pool.publish(RELAYS, signed); renderFeed();
+  pool.publish(RELAYS, signed); applyView();
 }
 async function saveProfile(){
   if(!ME){ alert('Log in to edit your profile.'); return; }
   const errEl = document.getElementById('profErr'); errEl.textContent='';
-  const displayName = document.getElementById('profDisplay').value.trim();
+  const dn = document.getElementById('profDisplay').value.trim();
   const bio = document.getElementById('profBio').value.trim();
   const avatarRaw = document.getElementById('profAvatar').value.trim();
   let avatar = '';
@@ -612,74 +968,102 @@ async function saveProfile(){
     if(!square){ errEl.textContent='Profile pictures must be square (equal width and height).'; return; }
     avatar = avatarRaw;
   }
-  const content = JSON.stringify({username:ME.username, tag:ME.tag, displayName, bio, avatar});
+  const content = JSON.stringify({username:ME.username, tag:ME.tag, displayName:dn, bio, avatar});
   const evt = { kind:30078, created_at:Math.floor(Date.now()/1000), tags:[["d","uoogle-profile"],["t",APP_NAMESPACE]], content, pubkey: ME.pubkey };
   const signed = finalizeEvent(evt, ME.secretKey);
-  profiles.set(ME.pubkey, {username:ME.username, tag:ME.tag, displayName, bio, avatar});
+  profiles.set(ME.pubkey, {username:ME.username, tag:ME.tag, displayName:dn||ME.username, bio, avatar});
+  document.getElementById('hdrAvatar').textContent='';
+  document.getElementById('hdrAvatar').appendChild(avatarEl(profiles.get(ME.pubkey), 34));
   pool.publish(RELAYS, signed);
-  renderFeed(); errEl.textContent='Saved.';
+  errEl.textContent='Saved.'; applyView();
 }
 async function toggleFollow(pubkey){
   if(!ME){ alert('Log in to follow.'); return; }
   if(following.includes(pubkey)) following = following.filter(p=>p!==pubkey);
   else following.push(pubkey);
   const evt = { kind:30078, created_at:Math.floor(Date.now()/1000), tags:[["d","uoogle-follows"],["t",APP_NAMESPACE]], content: JSON.stringify(following), pubkey: ME.pubkey };
-  const signed = finalizeEvent(evt, ME.secretKey);
-  pool.publish(RELAYS, signed);
-  renderFollowList(); renderFeed();
+  pool.publish(RELAYS, finalizeEvent(evt, ME.secretKey));
+  followListsByUser.set(ME.pubkey, {list:following.slice(), created_at:evt.created_at});
+  applyView();
 }
-
-async function fetchAccount(pubkey){
-  try{
-    const events = await pool.querySync(RELAYS, {kinds:[30078], authors:[pubkey], "#d":["uoogle-account"], "#t":[APP_NAMESPACE]});
-    if(!events || events.length===0) return null;
-    events.sort((a,b)=>b.created_at-a.created_at);
-    return JSON.parse(events[0].content);
-  }catch(e){ return null; }
+async function publishJoinedCommunities(){
+  const evt = { kind:30078, created_at:Math.floor(Date.now()/1000), tags:[["d","uoogle-communities"],["t",APP_NAMESPACE]], content: JSON.stringify(joinedCommunities), pubkey: ME.pubkey };
+  pool.publish(RELAYS, finalizeEvent(evt, ME.secretKey));
+  communityListsByUser.set(ME.pubkey, {list:joinedCommunities.slice(), created_at:evt.created_at});
 }
-async function publishAccount(username, passwordHash, question, answerHash){
-  const k = await keysForUsername(username);
-  const content = JSON.stringify({username: normUser(username), passwordHash, question, answerHash, updatedAt: Date.now()});
-  const evt = { kind:30078, created_at:Math.floor(Date.now()/1000), tags:[["d","uoogle-account"],["t",APP_NAMESPACE]], content, pubkey: k.pubkey };
-  const signed = finalizeEvent(evt, k.secretKey);
-  pool.publish(RELAYS, signed);
+async function toggleJoinCommunity(slug){
+  if(!ME){ alert('Log in to join a community.'); return; }
+  if(joinedCommunities.includes(slug)) joinedCommunities = joinedCommunities.filter(s=>s!==slug);
+  else joinedCommunities.push(slug);
+  await publishJoinedCommunities();
+  applyView();
+}
+async function createCommunity(name, description){
+  const slug = slugify(name);
+  const evt = { kind:COMMUNITY_KIND, created_at:Math.floor(Date.now()/1000), tags:[["d",slug],["t",APP_NAMESPACE]], content: JSON.stringify({name, description}), pubkey: ME.pubkey };
+  pool.publish(RELAYS, finalizeEvent(evt, ME.secretKey));
+  communities.set(slug, {name, description, pubkey:ME.pubkey, created_at:evt.created_at});
+  if(!joinedCommunities.includes(slug)) joinedCommunities.push(slug);
+  await publishJoinedCommunities();
+  applyView();
 }
 
 function onAnyEvent(e){
+  try{ if(!verifyEvent(e)) return; }catch(err){ return; }
   if(e.kind===1){
     if(posts.has(e.id)) return;
     posts.set(e.id, e);
     const u = e.tags.find(t=>t[0]==='u'); const tg = e.tags.find(t=>t[0]==='tag');
     if(u&&tg) ensureProfile(e.pubkey, u[1], tg[1]);
-    renderFeed();
   } else if(e.kind===7){
     const postId = (e.tags.find(t=>t[0]==='e')||[])[1]; if(!postId) return;
     const m = reactions.get(postId) || new Map();
     if(m.has(e.pubkey) && m.get(e.pubkey).created_at >= e.created_at) return;
-    m.set(e.pubkey, e); reactions.set(postId, m); renderFeed();
+    m.set(e.pubkey, e); reactions.set(postId, m);
   } else if(e.kind===6){
     const postId = (e.tags.find(t=>t[0]==='e')||[])[1]; if(!postId) return;
-    reshares.set(postId, e); renderFeed();
+    reshares.set(postId, e);
+  } else if(e.kind===COMMUNITY_KIND){
+    const slug = (e.tags.find(t=>t[0]==='d')||[])[1]; if(!slug) return;
+    try{
+      const c = JSON.parse(e.content); const prev = communities.get(slug);
+      if(!prev || e.created_at>prev.created_at) communities.set(slug, {name:String(c.name||slug), description:String(c.description||''), pubkey:e.pubkey, created_at:e.created_at});
+    }catch(err){ return; }
   } else if(e.kind===30078){
     const d = (e.tags.find(t=>t[0]==='d')||[])[1];
-    if(d==='uoogle-profile'){
-      try{
+    try{
+      if(d==='uoogle-profile'){
         const c = JSON.parse(e.content);
-        profiles.set(e.pubkey, {username:c.username, tag:c.tag, displayName:c.displayName||c.username, bio:c.bio||'', avatar:c.avatar||''});
-        renderFeed(); renderFollowList();
-        if(currentTab==='profileView' && viewingPubkey===e.pubkey) renderProfilePanel(e.pubkey);
-      }catch(err){}
-    } else if(d==='uoogle-follows' && ME && e.pubkey===ME.pubkey){
-      try{ following = JSON.parse(e.content) || []; renderFollowList(); renderFeed(); }catch(err){}
-    }
-  }
+        profiles.set(e.pubkey, {username:c.username, tag:c.tag, displayName:c.displayName||c.username, bio:c.bio||'', avatar:validImageUrl(c.avatar)?c.avatar:''});
+      } else if(d==='uoogle-follows'){
+        const list = JSON.parse(e.content) || [];
+        const prev = followListsByUser.get(e.pubkey);
+        if(!prev || e.created_at>=prev.created_at) followListsByUser.set(e.pubkey, {list, created_at:e.created_at});
+        if(ME && e.pubkey===ME.pubkey) following = list;
+      } else if(d==='uoogle-communities'){
+        const list = JSON.parse(e.content) || [];
+        const prev = communityListsByUser.get(e.pubkey);
+        if(!prev || e.created_at>=prev.created_at) communityListsByUser.set(e.pubkey, {list, created_at:e.created_at});
+        if(ME && e.pubkey===ME.pubkey) joinedCommunities = list;
+      } else return;
+    }catch(err){ return; }
+  } else return;
+  scheduleRender();
+}
+let renderTimer = null;
+function scheduleRender(){
+  if(renderTimer) return;
+  renderTimer = setTimeout(()=>{ renderTimer=null; applyView(); }, 120);
 }
 function subscribeAll(){
-  pool.subscribeMany(RELAYS, [{kinds:[1], "#t":[APP_NAMESPACE], limit:300}], {onevent:onAnyEvent});
-  pool.subscribeMany(RELAYS, [{kinds:[7], "#t":[APP_NAMESPACE], limit:1000}], {onevent:onAnyEvent});
-  pool.subscribeMany(RELAYS, [{kinds:[6], "#t":[APP_NAMESPACE], limit:300}], {onevent:onAnyEvent});
-  pool.subscribeMany(RELAYS, [{kinds:[30078], "#t":[APP_NAMESPACE], "#d":["uoogle-profile"]}], {onevent:onAnyEvent});
-  if(ME) pool.subscribeMany(RELAYS, [{kinds:[30078], "#t":[APP_NAMESPACE], "#d":["uoogle-follows"], authors:[ME.pubkey]}], {onevent:onAnyEvent});
+  const f = (filter)=>pool.subscribeMany(RELAYS, [filter], {onevent:onAnyEvent});
+  f({kinds:[1], "#t":[APP_NAMESPACE], limit:300});
+  f({kinds:[7], "#t":[APP_NAMESPACE], limit:1000});
+  f({kinds:[6], "#t":[APP_NAMESPACE], limit:300});
+  f({kinds:[COMMUNITY_KIND], "#t":[APP_NAMESPACE], limit:200});
+  f({kinds:[30078], "#t":[APP_NAMESPACE], "#d":["uoogle-profile"]});
+  f({kinds:[30078], "#t":[APP_NAMESPACE], "#d":["uoogle-follows"]});
+  f({kinds:[30078], "#t":[APP_NAMESPACE], "#d":["uoogle-communities"]});
 }
 
 function showStep(id){
@@ -690,10 +1074,9 @@ document.getElementById('continueBtn').onclick = async ()=>{
   const username = document.getElementById('loginUser').value;
   if(!normUser(username)){ uErr.textContent='Enter a username.'; return; }
   uErr.textContent = 'Checking relays…';
-  const k = await keysForUsername(username);
-  const account = await fetchAccount(k.pubkey);
+  const {genesis} = parseAccountEvents(await fetchAccountRecords(username));
   uErr.textContent='';
-  if(account){
+  if(genesis){
     document.getElementById('loginUnameLabel').textContent = normUser(username);
     showStep('stepLogin');
   } else {
@@ -709,12 +1092,11 @@ document.getElementById('loginBtn').onclick = async ()=>{
   const errEl = document.getElementById('loginErr'); errEl.textContent='';
   const username = document.getElementById('loginUser').value;
   const password = document.getElementById('loginPass').value;
-  const k = await keysForUsername(username);
-  const account = await fetchAccount(k.pubkey);
-  if(!account){ errEl.textContent='Account not found on any relay right now, try again.'; return; }
-  const hash = await sha256Hex('uoogle-pw:'+password);
-  if(hash !== account.passwordHash){ errEl.textContent='Incorrect password.'; return; }
-  enterApp(k, false);
+  errEl.textContent = 'Verifying…';
+  const res = await tryLoginWithPassword(username, password);
+  if(!res.ok){ errEl.textContent = res.reason==='notfound' ? 'Account not found on any relay right now, try again.' : 'Incorrect password.'; return; }
+  errEl.textContent='';
+  enterApp(res, false);
 };
 document.getElementById('signupBtn').onclick = async ()=>{
   const errEl = document.getElementById('signupErr'); errEl.textContent='';
@@ -723,20 +1105,18 @@ document.getElementById('signupBtn').onclick = async ()=>{
   const question = document.getElementById('signupQuestion').value.trim();
   const answer = document.getElementById('signupAnswer').value;
   if(!password || !question || !answer){ errEl.textContent='Fill in all fields.'; return; }
-  const k = await keysForUsername(username);
-  const passwordHash = await sha256Hex('uoogle-pw:'+password);
-  const answerHash = await sha256Hex('uoogle-ans:'+normUser(answer));
-  await publishAccount(username, passwordHash, question, answerHash);
-  enterApp(k, false);
+  errEl.textContent='Creating your account…';
+  const res = await createAccount(username, password, question, answer);
+  errEl.textContent='';
+  enterApp(res, false);
 };
 document.getElementById('forgotLink').onclick = async ()=>{
   const username = document.getElementById('loginUser').value;
   document.getElementById('forgotUnameLabel').textContent = normUser(username);
   document.getElementById('forgotQuestion').textContent = 'Loading question…';
   showStep('stepForgot');
-  const k = await keysForUsername(username);
-  const account = await fetchAccount(k.pubkey);
-  document.getElementById('forgotQuestion').textContent = account ? ('Question: ' + account.question) : 'Account not found.';
+  const {genesis} = parseAccountEvents(await fetchAccountRecords(username));
+  document.getElementById('forgotQuestion').textContent = genesis ? ('Question: ' + genesis.data.question) : 'Account not found.';
 };
 document.getElementById('forgotBtn').onclick = async ()=>{
   const errEl = document.getElementById('forgotErr'); errEl.textContent='';
@@ -744,63 +1124,120 @@ document.getElementById('forgotBtn').onclick = async ()=>{
   const answer = document.getElementById('forgotAnswer').value;
   const newPass = document.getElementById('forgotNewPass').value;
   if(!newPass){ errEl.textContent='Enter a new password.'; return; }
-  const k = await keysForUsername(username);
-  const account = await fetchAccount(k.pubkey);
-  if(!account){ errEl.textContent='Account not found.'; return; }
-  const answerHash = await sha256Hex('uoogle-ans:'+normUser(answer));
-  if(answerHash !== account.answerHash){ errEl.textContent='Incorrect answer.'; return; }
-  const passwordHash = await sha256Hex('uoogle-pw:'+newPass);
-  await publishAccount(username, passwordHash, account.question, account.answerHash);
+  errEl.textContent='Verifying your answer…';
+  const res = await tryLoginWithAnswer(username, answer);
+  if(!res.ok){ errEl.textContent='Incorrect answer. Recovery is only possible with the exact original answer.'; return; }
+  await publishPasswordUpdate(username, res.secretKey, newPass);
   errEl.textContent='Password reset. You can log in now.';
 };
 document.getElementById('browseLink').onclick = ()=>enterApp(null, true);
 
 async function enterApp(k, readonly){
   READONLY = readonly;
-  ME = readonly ? null : { username: normUser(document.getElementById('loginUser').value), tag:k.tag, secretKey:k.secretKey, pubkey:k.pubkey };
+  ME = readonly ? null : { username: k.username, tag:k.tag, secretKey:k.secretKey, pubkey:k.pubkey };
   document.getElementById('loginScreen').classList.add('hidden');
   document.getElementById('app').classList.remove('hidden');
-  document.getElementById('composePanel').classList.toggle('hidden', readonly);
-  document.getElementById('editProfilePanel').classList.toggle('hidden', readonly);
-  document.getElementById('whoami').textContent = readonly ? 'Browsing (not logged in)' : (ME.username + ' ' + ME.tag);
-  document.getElementById('hdrAvatar').textContent = readonly ? '?' : ME.username[0].toUpperCase();
+  document.getElementById('whoami').textContent = readonly ? 'Browsing (not logged in)' : ('+' + ME.username);
   if(ME) ensureProfile(ME.pubkey, ME.username, ME.tag);
+  const hdr = document.getElementById('hdrAvatar');
+  hdr.textContent = '';
+  hdr.appendChild(avatarEl(ME ? profiles.get(ME.pubkey) : null, 34));
+  document.getElementById('myProfileLink').classList.toggle('hidden', readonly);
+  document.getElementById('editProfileLink').classList.toggle('hidden', readonly);
   subscribeAll();
-  renderFeed();
-  if(!readonly) lsSet('uoogle_last_username', ME.username);
+  applyView();
+  if(!readonly && document.getElementById('stayCheckbox').checked) lsSet('uoogle_last_username', ME.username);
 }
 
-document.getElementById('postBtn').onclick = ()=>{
+function setComposeMode(mode){
+  document.getElementById('cIconText').classList.toggle('active', mode==='text');
+  document.getElementById('cIconPhotos').classList.toggle('active', mode==='photos');
+  document.getElementById('cIconVideo').classList.toggle('active', mode==='video');
+  document.getElementById('composeExtra').classList.toggle('hidden', mode==='text');
+  document.getElementById('composeImg').classList.toggle('hidden', mode!=='photos');
+  document.getElementById('composeVideo').classList.toggle('hidden', mode!=='video');
+}
+document.getElementById('cIconVideo').onclick = ()=>{ setComposeMode('video'); document.getElementById('composeVideo').focus(); };
+document.getElementById('cIconText').onclick = ()=>{ setComposeMode('text'); document.getElementById('composeText').focus(); };
+document.getElementById('cIconPhotos').onclick = ()=>{ setComposeMode('photos'); document.getElementById('composeImg').focus(); };
+document.getElementById('postBtn').onclick = async ()=>{
   const txt = document.getElementById('composeText').value;
   const img = document.getElementById('composeImg').value.trim();
+  const vid = document.getElementById('composeVideo').value.trim();
   const msg = document.getElementById('composeMsg'); msg.textContent='';
   if(img && !validImageUrl(img)){ msg.textContent = 'Image URL must be https://files.catbox.moe/...'; return; }
-  publishPost(txt, img||null, null);
-  document.getElementById('composeText').value=''; document.getElementById('composeImg').value='';
+  if(vid && !validVideoUrl(vid)){ msg.textContent = 'Video URL must be a https://files.catbox.moe/ link ending in .mp4, .webm, .mov, .m4v or .ogv'; return; }
+  const ok = await publishPost(txt, img||null, null, vid||null);
+  if(ok){ document.getElementById('composeText').value=''; document.getElementById('composeImg').value=''; document.getElementById('composeVideo').value=''; }
 };
 document.getElementById('catboxBtn').onclick = ()=>window.open('https://catbox.moe/', '_blank');
+document.getElementById('shareBtn').onclick = ()=>{
+  if(!ME){ alert('Log in to share a post.'); return; }
+  viewingPubkey = null; currentSection = 'home'; currentTab = 'all';
+  document.querySelectorAll('nav button[data-tab]').forEach(x=>x.classList.toggle('active', x.dataset.tab==='all'));
+  applyView();
+  const ta = document.getElementById('composeText');
+  ta.scrollIntoView({behavior:'smooth', block:'center'});
+  ta.focus();
+};
 document.getElementById('saveProfBtn').onclick = saveProfile;
+document.getElementById('changePassBtn').onclick = async ()=>{
+  const errEl = document.getElementById('changePassErr'); errEl.textContent='';
+  const oldP = document.getElementById('oldPassField').value;
+  const newP = document.getElementById('newPassField').value;
+  if(!oldP || !newP){ errEl.textContent='Fill in both fields.'; return; }
+  errEl.textContent = 'Verifying current password…';
+  const res = await changePassword(oldP, newP);
+  if(!res.ok){ errEl.textContent = 'Current password is incorrect. Nothing was changed.'; return; }
+  errEl.textContent = 'Password changed.';
+  document.getElementById('oldPassField').value=''; document.getElementById('newPassField').value='';
+};
 document.getElementById('switchIdBtn').onclick = ()=>location.reload();
+document.getElementById('myProfileLink').onclick = ()=>{ document.getElementById('idDrop').classList.add('hidden'); if(ME) viewProfile(ME.pubkey); };
+document.getElementById('editProfileLink').onclick = ()=>{
+  document.getElementById('idDrop').classList.add('hidden');
+  if(!ME) return;
+  viewingPubkey = ME.pubkey; profileSubtab = 'about'; currentSection = 'home';
+  applyView();
+};
 
 function selectTab(tabName){
-  document.querySelectorAll('nav button[data-tab], .rail button[data-tab]').forEach(x=>x.classList.toggle('active', x.dataset.tab===tabName));
-  currentTab = tabName; viewingPubkey = null;
-  document.getElementById('profileViewPanel').classList.add('hidden');
-  renderFeed();
+  document.querySelectorAll('nav button[data-tab]').forEach(x=>x.classList.toggle('active', x.dataset.tab===tabName));
+  currentTab = tabName; viewingPubkey = null; profileSubtab = 'posts'; currentSection = 'home';
+  applyView();
 }
-document.querySelectorAll('nav button[data-tab], .rail button[data-tab]').forEach(b=>{ b.onclick = ()=>selectTab(b.dataset.tab); });
+document.querySelectorAll('nav button[data-tab]').forEach(b=>{ b.onclick = ()=>selectTab(b.dataset.tab); });
 
-document.getElementById('searchBtn').onclick = ()=>{ searchQuery = document.getElementById('search').value; renderFeed(); };
+document.getElementById('sectionSwitchBtn').onclick = (ev)=>{ ev.stopPropagation(); document.getElementById('sectionMenu').classList.toggle('hidden'); };
+document.querySelectorAll('#sectionMenu button').forEach(b=>{
+  b.onclick = ()=>{
+    currentSection = b.dataset.section; viewingPubkey = null; profileSubtab = 'posts';
+    document.getElementById('sectionMenu').classList.add('hidden');
+    applyView();
+  };
+});
+document.getElementById('createCommunityBtn').onclick = async ()=>{
+  const errEl = document.getElementById('communityErr'); errEl.textContent='';
+  if(!ME){ errEl.textContent='Log in to create a community.'; return; }
+  const name = document.getElementById('newCommunityName').value.trim();
+  const desc = document.getElementById('newCommunityDesc').value.trim();
+  if(!name){ errEl.textContent='Enter a name.'; return; }
+  await createCommunity(name, desc);
+  document.getElementById('newCommunityName').value=''; document.getElementById('newCommunityDesc').value='';
+  errEl.textContent='Community created.';
+};
+
+document.getElementById('searchBtn').onclick = ()=>{ searchQuery = document.getElementById('search').value; applyView(); };
 document.getElementById('search').oninput = (e)=>{
   searchQuery = e.target.value;
   const hint = document.getElementById('searchHint');
   if(searchQuery.trim()){
     hint.classList.remove('hidden'); hint.textContent='';
-    const link = el('a',{}, 'View profile: ' + searchQuery.trim());
+    const link = el('a',{style:'color:#3c78d8;cursor:pointer'}, 'View profile: ' + searchQuery.trim());
     link.onclick = ()=>viewProfileByUsername(searchQuery.trim());
     hint.appendChild(link);
   } else hint.classList.add('hidden');
-  renderFeed();
+  applyView();
 };
 
 document.getElementById('hdrAvatar').onclick = ()=>{ document.getElementById('idDrop').classList.toggle('hidden'); document.getElementById('notifDrop').classList.add('hidden'); };
@@ -821,15 +1258,24 @@ document.getElementById('bellBtn').onclick = ()=>{
     renderBell();
   }
 };
+document.getElementById('statusDot').onclick = ()=>alert(document.getElementById('statusDot').title);
 document.addEventListener('click', (ev)=>{
   if(!ev.target.closest('.idbox')) document.getElementById('idDrop').classList.add('hidden');
   if(!ev.target.closest('.bellbox')) document.getElementById('notifDrop').classList.add('hidden');
+  if(!ev.target.closest('.sectionSwitch')) document.getElementById('sectionMenu').classList.add('hidden');
+});
+
+['Art & Design','Automotive','Food & Drink','Gaming','Nature','Photography','Science','Sports','Technology'].forEach(c=>{
+  const a = el('a',{}, c);
+  a.onclick = ()=>{ searchQuery = c; document.getElementById('search').value = c; selectTab('explore'); };
+  document.getElementById('exploreCats').appendChild(a);
 });
 
 setInterval(renderStatus, 5000);
 setInterval(renderBell, 15000);
 const lastU = lsGet('uoogle_last_username', null);
 if(lastU) document.getElementById('loginUser').value = lastU;
+initIcons();
 </script>
 </body>
 </html>
